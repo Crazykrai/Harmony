@@ -1,2 +1,23 @@
-<button (click)="authorizeFlow()">Login</button>
-<app-user-profile *ngIf="spotifyToken != ''" [token]="spotifyToken"></app-user-profile>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmoney</title>
+    <link rel="stylesheet" href="app.component.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div>
+        <h1>Harmony</h1>
+        <div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Spotify_logo_with_text.svg/559px-Spotify_logo_with_text.svg.png?20160123211747"
+                alt="Spotify Image Login">
+        </div>
+        <button mat-button (click)="authorizeFlow()"><b>Login</b></button>
+        <app-user-profile *ngIf="spotifyToken != ''" [token]="spotifyToken"></app-user-profile>
+    </div>
+</body>

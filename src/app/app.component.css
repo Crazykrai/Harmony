@@ -1,0 +1,40 @@
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+body {
+    font-family: 'Spotify Font', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: rgb(216, 216, 216);
+}
+
+h1 {
+    font-weight: 500;
+    font-size: 70px;
+    height: 90px;
+    /*display: flex;*/
+    padding-bottom: 15%;
+    color: rgb(48, 48, 48);
+}
+
+div {
+    text-align: center;
+}
+
+button {
+    border-radius: 2em;
+    align-content: center;
+    background: #1ED760;
+    /*color: #1ED760;*/
+    border: 0px;
+    padding: 1em 2em;
+    font-size: 1.5em;
+    transition: color .25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+button:hover {
+    box-shadow: 0 0.5em 0.5em -0.4em #f1ff5c;
+    transform: translateZ(-0.25em);
+    cursor: pointer;
+}
