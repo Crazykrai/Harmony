@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { SpotifyToken } from '../models/spotify-token';
 import { UserData } from '../models/userData';
 import { environment } from '../environments/environments';
+import { UserTopitems } from '../models/userTopItems';
 
 
 
@@ -44,5 +45,12 @@ export class SpotifyService {
     })
   }
 
-  
+  public getUserTopItems(token: string) {
+    console.log('Getting User Top Items');   
+    return this.http.get<UserTopitems>('https://api.spotify.com/v1/me/top/tracks', {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      },
+    })
+  }
 }

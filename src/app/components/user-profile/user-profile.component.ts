@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { UserData } from 'src/app/models/userData';
+import { UserTopitems } from 'src/app/models/userTopItems';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class UserProfileComponent implements OnInit {
 
     ngOnInit() {
       this.spotify.getUserProfile(this.token).subscribe(data => this.showUserData(data));
+      
     }
 
     @Input() 
@@ -21,6 +23,11 @@ export class UserProfileComponent implements OnInit {
     public userData: UserData = {
       images: []
     };
+
+    public userItems: UserTopitems = {
+      items: [],
+      topArtists: []
+    }
 
     private showUserData(data: UserData) {
       this.userData.display_name = data.display_name;
