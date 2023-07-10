@@ -22,19 +22,3 @@ div {
     text-align: center;
 }
 
-button {
-    border-radius: 2em;
-    align-content: center;
-    background: #1ED760;
-    /*color: #1ED760;*/
-    border: 0px;
-    padding: 1em 2em;
-    font-size: 1.5em;
-    transition: color .25s, border-color 0.25s, box-shadow 0.25s, transform 0.25s;
-}
-
-button:hover {
-    box-shadow: 0 0.5em 0.5em -0.4em #f1ff5c;
-    transform: translateZ(-0.25em);
-    cursor: pointer;
-}

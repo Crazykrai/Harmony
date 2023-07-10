@@ -1,26 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as sqlite3 from 'sqlite3'
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
-  private database: sqlite3.Database;
+  private baseURL: string = "http://localhost:8080"
 
-  constructor() {
-    this.database = new sqlite3.Database('/harmonydb.sqlite');
-  }
+  constructor(private http: HttpClient) { }
 
-  query(sql: string, params: any[] = []): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.database.all(sql, params, (err, rows) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(rows);
-        }
-      });
-    });
+  public createNewUser(data: any) {
+    this.http.post(this.baseURL + "/newuser", data).subscribe(data => console.log(data));
   }
 }
 
