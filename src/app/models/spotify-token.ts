@@ -3,5 +3,5 @@ export interface SpotifyToken {
     scope: string;
     tokenType: string;
     expiresIn: number;
-    refreshToken: string;
+    refresh_token: string;
 }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { SpotifyToken } from '../models/spotify-token';
 import { UserData } from '../models/userData';
 import { environment } from '../environments/environments';
-import { UserTopitems } from '../models/userTopItems';
+import { UserTopArtists, UserTopSongs } from '../models/userTopItems';
 
 
 
@@ -18,10 +18,14 @@ export class SpotifyService {
     this.clientSecret = environment.CLIENT_SECRET;
   }
 
-  clientId = '';
-  clientSecret = '';
+  private clientId = '';
+  
+  private clientSecret = '';
 
-  public getAccessToken(code: string): Observable<SpotifyToken> {
+  private accessToken: string = '';
+  private refreshToken: string = '';
+
+  public setAccessToken(code: string): Observable<SpotifyToken> {
     const body2 = new URLSearchParams();
     body2.append('grant_type', 'authorization_code');
     body2.append('code', code);
@@ -32,25 +36,53 @@ export class SpotifyService {
         'Authorization': 'Basic ' + (btoa(this.clientId + ':' + this.clientSecret)),
         'Content-Type': 'application/x-www-form-urlencoded'
       },
-    } 
-    )
+    });
   }
 
-  public getUserProfile(token: string) { 
+  public setSpotifyTokens(data: SpotifyToken) {
+    this.accessToken = data.access_token;
+    this.refreshToken = data.refresh_token;
+  }
+
+  public getAccessToken() {
+    return this.accessToken;
+  }
+
+  public isAuthorized(): boolean {
+    if(this.accessToken !== '') return true;
+
+    return false;
+  }
+
+  public getUserProfile() { 
     console.log('Getting User Profile');   
+    console.log(this.accessToken);
     return this.http.get<UserData>('https://api.spotify.com/v1/me', {
       headers: {
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Bearer ' + this.accessToken
       },
     })
   }
 
-  public getUserTopItems(token: string) {
+  public getUserTopTracks() {
     console.log('Getting User Top Items');   
-    return this.http.get<UserTopitems>('https://api.spotify.com/v1/me/top/tracks', {
+    return this.http.get<UserTopSongs>('https://api.spotify.com/v1/me/top/tracks', {
       headers: {
-        'Authorization': 'Bearer ' + token
+        'Authorization': 'Bearer ' + this.accessToken
       },
     })
+  }
+
+  public getUserTopArtists() {
+    console.log('Getting User Top Artists');   
+    return this.http.get<UserTopArtists>('https://api.spotify.com/v1/me/top/artists', {
+      headers: {
+        'Authorization': 'Bearer ' + this.accessToken
+      },
+    })
+  }
+
+  public getSpotifyEmbed(url: string) {
+    return this.http.get('https://open.spotify.com/oembed?url=' + url);
   }
 }

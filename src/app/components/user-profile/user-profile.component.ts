@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { UserData } from 'src/app/models/userData';
-import { UserTopitems } from 'src/app/models/userTopItems';
+import { UserTopSongs } from 'src/app/models/userTopItems';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
@@ -14,21 +14,18 @@ export class UserProfileComponent implements OnInit {
     constructor( private spotify: SpotifyService, private mongoose: DatabaseService, private ref: ChangeDetectorRef) {}
 
     ngOnInit() {
-      this.spotify.getUserProfile(this.token).subscribe(data => this.showUserData(data));
-      
+      this.spotify.getUserProfile().subscribe(data => this.showUserData(data));
+      this.spotify.getUserTopTracks().subscribe(data => this.favoriteSong = data.items[0] ? data.items[0].name : 'Error retrieving favorite song');
+      this.spotify.getUserTopArtists().subscribe(data => this.favoriteArtist = data.items[0] ? data.items[0].name : 'Error retrieving favorite artist');
     }
 
-    @Input() 
-    public token: string = '';
+    public favoriteSong: string = '';
+
+    public favoriteArtist: string = '';
 
     public userData: UserData = {
       images: []
     };
-
-    public userItems: UserTopitems = {
-      items: [],
-      topArtists: []
-    }
 
     private showUserData(data: UserData) {
       this.userData.display_name = data.display_name;

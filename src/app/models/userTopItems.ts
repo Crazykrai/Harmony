@@ -1,6 +1,9 @@
-export interface UserTopitems {
+export interface UserTopSongs {
     items: track[],
-    topArtists: artist[],
+}
+
+export interface UserTopArtists {
+    items: artist[],
 }
 
 interface track {
