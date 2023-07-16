@@ -14,3 +14,26 @@ button:hover {
     transform: translateZ(-0.25em);
     cursor: pointer;
 }
+
+h1 {
+    font-weight: 500;
+    font-size: 70px;
+    height: 90px;
+    padding-top:10%;
+    color: rgb(48, 48, 48);
+}
+
+#loginContent {
+    font-family: 'Spotify Font', sans-serif;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+#shell {
+    background-color: rgb(216, 216, 216);
+    height: 100vh;
+}
+
+div {
+    text-align: center;
+}

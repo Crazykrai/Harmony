@@ -1,24 +1,5 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-body {
-    font-family: 'Spotify Font', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: rgb(216, 216, 216);
-}
-
-h1 {
-    font-weight: 500;
-    font-size: 70px;
-    height: 90px;
-    /*display: flex;*/
-    padding-bottom: 15%;
-    color: rgb(48, 48, 48);
-}
-
 div {
     text-align: center;
 }
-

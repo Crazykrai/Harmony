@@ -11,8 +11,10 @@
 </head>
 
 <body>
+    <div *ngIf="renderNavbar()">
+        <app-navbar></app-navbar>
+    </div>
     <div>
-        <h1>Harmony</h1>
         <router-outlet></router-outlet>
     </div>
 </body>

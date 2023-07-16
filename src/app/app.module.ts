@@ -9,12 +9,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FriendCardComponent } from './components/Recommendations/friend-card.component';
 import { FriendListComponent } from './components/Recommendations/friend-list.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RecommendationsPageComponent } from './pages/recommendations-page/recommendations-page.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -26,7 +29,8 @@ import { RecommendationsPageComponent } from './pages/recommendations-page/recom
     LoginPageComponent,
     ProfilePageComponent,
     HomePageComponent,
-    RecommendationsPageComponent
+    RecommendationsPageComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +38,8 @@ import { RecommendationsPageComponent } from './pages/recommendations-page/recom
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
     AppRoutingModule,
   ],
   providers: [],
