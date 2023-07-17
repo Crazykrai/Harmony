@@ -5,6 +5,7 @@ import { SpotifyToken } from '../models/spotify-token';
 import { UserData } from '../models/userData';
 import { environment } from '../environments/environments';
 import { UserTopArtists, UserTopSongs } from '../models/userTopItems';
+import { UserPlaylists } from '../models/userPlaylists';
 
 
 
@@ -61,28 +62,39 @@ export class SpotifyService {
       headers: {
         'Authorization': 'Bearer ' + this.accessToken
       },
-    })
+    });
   }
 
   public getUserTopTracks() {
     console.log('Getting User Top Items');   
-    return this.http.get<UserTopSongs>('https://api.spotify.com/v1/me/top/tracks', {
+    return this.http.get<UserTopSongs>('https://api.spotify.com/v1/me/top/tracks?time_range=long_term', {
       headers: {
         'Authorization': 'Bearer ' + this.accessToken
       },
-    })
+    });
   }
 
   public getUserTopArtists() {
     console.log('Getting User Top Artists');   
-    return this.http.get<UserTopArtists>('https://api.spotify.com/v1/me/top/artists', {
+    return this.http.get<UserTopArtists>('https://api.spotify.com/v1/me/top/artists?time_range=long_term', {
       headers: {
         'Authorization': 'Bearer ' + this.accessToken
       },
-    })
+    });
+  }
+
+  public getUserPlaylists() {
+    console.log('Getting User playlists');
+    return this.http.get<UserPlaylists>('https://api.spotify.com/v1/me/playlists', {
+      headers: {
+        'Authorization': 'Bearer ' + this.accessToken
+      },
+    });
   }
 
   public getSpotifyEmbed(url: string) {
     return this.http.get('https://open.spotify.com/oembed?url=' + url);
   }
+
+
 }

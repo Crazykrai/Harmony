@@ -12,5 +12,9 @@ export class DatabaseService {
   public createNewUser(data: any) {
     this.http.post(this.baseURL + "/newuser", data).subscribe(data => console.log(data));
   }
+
+  public getUserData(email: string) {
+    this.http.get(this.baseURL + '/user/' + email).subscribe(data => console.log(data));
+  }
 }
 
