@@ -2,26 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-friend-list',
-  template: `
-    <div class="friend-list">
-      <app-friend-card
-        *ngFor="let friend of friends"
-        [pictureUrl]="friend.pictureUrl"
-        [friendName]="friend.name"
-        [smallPicture]="true"
-        [recommendation]="friend.recommendation"
-      ></app-friend-card>
-    </div>
-  `,
-  styles: [
-    `
-    .friend-list {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    `,
-  ],
+  templateUrl: './friend-list.component.html',
+  styleUrls: ['./friend-list.component.css']
 })
 export class FriendListComponent {
   friends = [

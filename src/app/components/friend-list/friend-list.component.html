@@ -1,0 +1,9 @@
+<div class="friend-list">
+    <app-friend-card
+      *ngFor="let friend of friends"
+      [pictureUrl]="friend.pictureUrl"
+      [friendName]="friend.name"
+      [smallPicture]="true"
+      [recommendation]="friend.recommendation"
+    ></app-friend-card>
+  </div>

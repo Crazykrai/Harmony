@@ -6,8 +6,8 @@ import { AppComponent } from './app.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FriendCardComponent } from './components/Recommendations/friend-card.component';
-import { FriendListComponent } from './components/Recommendations/friend-list.component';
+import { FriendCardComponent } from './components/friend-card/friend-card.component';
+import { FriendListComponent } from './components/friend-list/friend-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
