@@ -67,7 +67,7 @@ export class SpotifyService {
 
   public getUserTopTracks() {
     console.log('Getting User Top Items');   
-    return this.http.get<UserTopSongs>('https://api.spotify.com/v1/me/top/tracks?time_range=long_term', {
+    return this.http.get<UserTopSongs>('https://api.spotify.com/v1/me/top/tracks', {
       headers: {
         'Authorization': 'Bearer ' + this.accessToken
       },
@@ -93,7 +93,7 @@ export class SpotifyService {
   }
 
   public getSpotifyEmbed(url: string) {
-    return this.http.get('https://open.spotify.com/oembed?url=' + url);
+    return this.http.get<any>('https://open.spotify.com/oembed?url=' + url);
   }
 
 

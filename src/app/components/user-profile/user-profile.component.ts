@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { UserData } from 'src/app/models/userData';
-import { UserTopSongs } from 'src/app/models/userTopItems';
+import { UserTopArtists, UserTopSongs } from 'src/app/models/userTopItems';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
@@ -15,8 +15,8 @@ export class UserProfileComponent implements OnInit {
 
     ngOnInit() {
       this.spotify.getUserProfile().subscribe(data => this.showUserData(data));
-      this.spotify.getUserTopTracks().subscribe(data => this.favoriteSong = data.items[0] ? data.items[0].name : 'Error retrieving favorite song');
-      this.spotify.getUserTopArtists().subscribe(data => this.favoriteArtist = data.items[0] ? data.items[0].name : 'Error retrieving favorite artist');
+      this.spotify.getUserTopTracks().subscribe(data => this.handleTopTracks(data));
+      this.spotify.getUserTopArtists().subscribe(data => this.handleTopArtists(data));
     }
 
     public favoriteSong: string = '';
@@ -39,6 +39,33 @@ export class UserProfileComponent implements OnInit {
         this.ref.detectChanges();
       }
     }
+
+    private handleTopTracks(data: UserTopSongs) {
+      if(data.items[0]) {
+        this.favoriteSong = data.items[0].name;
+        this.spotify.getSpotifyEmbed(data.items[0].external_urls.spotify).subscribe(
+          data => document.getElementById('fs')!.innerHTML = data.html
+        );
+      } else {
+        this.favoriteSong = 'Error retrieving favorite song'
+      }
+    }
+    
+    private handleTopArtists(data: UserTopArtists) {
+      if(data.items[0]) {
+        this.favoriteArtist = data.items[0].name;
+        this.spotify.getSpotifyEmbed(data.items[0].external_urls.spotify).subscribe(
+          data => {
+            document.getElementById('fa')!.innerHTML = data.html;
+            console.log(data);
+          }
+        );
+        data.items.flatMap(item => console.log(item.genres));
+      } else {
+        this.favoriteArtist = 'Error retrieving favorite artist'
+      }
+    }
+    
 
 
     

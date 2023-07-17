@@ -8,11 +8,17 @@ export interface UserTopArtists {
 
 interface track {
     name: string,
-    id: string
+    id: string,
+    external_urls: {
+        spotify: string
+    }
 }
 
 interface artist {
     genres: string[],
     id: string,
-    name: string
+    name: string,
+    external_urls: {
+        spotify: string
+    }
 }
