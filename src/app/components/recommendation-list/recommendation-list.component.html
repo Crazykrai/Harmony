@@ -1,0 +1,7 @@
+<div class="recommendation-list">
+    <app-recommendation-card
+      *ngFor="let friend of friends; index as i"
+      [friend] = "friend"
+      [i] = "i.toString()"
+    ></app-recommendation-card>
+  </div>

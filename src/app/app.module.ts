@@ -18,6 +18,8 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RecommendationsPageComponent } from './pages/recommendations-page/recommendations-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { RecommendationCardComponent } from './components/recommendation-card/recommendation-card.component';
+import { RecommendationListComponent } from './components/recommendation-list/recommendation-list.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ProfilePageComponent,
     HomePageComponent,
     RecommendationsPageComponent,
-    NavbarComponent
+    NavbarComponent,
+    RecommendationCardComponent,
+    RecommendationListComponent
   ],
   imports: [
     BrowserModule,
