@@ -19,7 +19,6 @@ export class AppComponent  {
   private currentRoute = 'code';
   
   public renderNavbar(): boolean {
-    console.log(this.currentRoute);
     if(this.currentRoute.includes('code') || this.currentRoute == '/') return false;
 
     return true;

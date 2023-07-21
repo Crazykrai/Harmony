@@ -1,6 +1,6 @@
 export interface UserData {
-    display_name?: string;
-    email?: string;
+    display_name: string;
+    email: string;
     images: image[];
     
 }

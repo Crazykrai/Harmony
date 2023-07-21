@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { UserData } from 'src/app/models/userData';
+import { UserHarmonyData } from 'src/app/models/userHarmonyData';
 import { UserTopArtists, UserTopSongs } from 'src/app/models/userTopItems';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
@@ -23,21 +24,29 @@ export class UserProfileComponent implements OnInit {
 
     public favoriteArtist: string = '';
 
-    public userData: UserData = {
-      images: []
+    favoriteGenre: string = '';
+
+    public userData: UserHarmonyData = {
+      displayName: '',
+      email: '',
+      imageUrl: '',
+      friends: [],
+      posts: [],
+      recommendations: [],
+      topGenre: ''
     };
 
     private showUserData(data: UserData) {
-      this.userData.display_name = data.display_name;
+      this.userData.displayName = data.display_name;
       this.userData.email = data.email;
       if(data.images[0]) {
-        this.userData.images.push(data.images[0])
-        this.mongoose.createNewUser(this.userData);
+        this.userData.imageUrl = data.images[0].url;
         const profileImage = new Image();
         profileImage.src = data.images[0].url;
         document.getElementById('avatar')!.appendChild(profileImage);
         this.ref.detectChanges();
       }
+      this.saveUserData();
     }
 
     private handleTopTracks(data: UserTopSongs) {
@@ -60,9 +69,33 @@ export class UserProfileComponent implements OnInit {
             console.log(data);
           }
         );
-        data.items.flatMap(item => console.log(item.genres));
+
+        const genres: any = data.items.flatMap(item => item.genres);
+        
+        var mf = 1;
+        var m = 0;
+        for (var i=0; i<genres.length; i++) {
+                for (var j=i; j<genres.length; j++)
+                {
+                        if (genres[i] == genres[j])
+                        m++;
+                        if (mf<m)
+                        {
+                          mf=m; 
+                          this.userData.topGenre = genres[i];
+                        }
+                }
+                m=0;
+        }
+        this.saveUserData();
       } else {
         this.favoriteArtist = 'Error retrieving favorite artist'
+      }
+    }
+
+    private saveUserData() {
+      if(this.userData.topGenre != '' && this.userData.displayName != '') {
+        this.mongoose.createNewUser(this.userData);
       }
     }
     

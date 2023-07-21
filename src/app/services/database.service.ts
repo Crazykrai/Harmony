@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UserHarmonyData } from '../models/userHarmonyData';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class DatabaseService {
   }
 
   public getUserData(email: string) {
-    this.http.get(this.baseURL + '/user/' + email).subscribe(data => console.log(data));
+    this.http.get<UserHarmonyData>(this.baseURL + '/user/' + email).subscribe(data => console.log(data));
   }
 }
 
