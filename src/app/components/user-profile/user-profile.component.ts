@@ -95,6 +95,7 @@ export class UserProfileComponent implements OnInit {
 
     private saveUserData() {
       if(this.userData.topGenre != '' && this.userData.displayName != '') {
+        this.spotify.setCurrentUser(this.userData);
         this.mongoose.createNewUser(this.userData);
       }
     }

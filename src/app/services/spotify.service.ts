@@ -6,6 +6,7 @@ import { UserData } from '../models/userData';
 import { environment } from '../environments/environments';
 import { UserTopArtists, UserTopSongs } from '../models/userTopItems';
 import { UserPlaylists } from '../models/userPlaylists';
+import { UserHarmonyData } from '../models/userHarmonyData';
 
 
 
@@ -25,6 +26,24 @@ export class SpotifyService {
 
   private accessToken: string = '';
   private refreshToken: string = '';
+
+  private currentUserData: UserHarmonyData = {
+    displayName: '',
+    email: '',
+    imageUrl: '',
+    friends: [],
+    posts: [],
+    recommendations: [],
+    topGenre: ''
+  };
+
+  public setCurrentUser(data: UserHarmonyData) {
+    this.currentUserData = data;
+  }
+
+  public getCurrentUser(): UserHarmonyData {
+    return this.currentUserData;
+  }
 
   public setAccessToken(code: string): Observable<SpotifyToken> {
     const body2 = new URLSearchParams();

@@ -1,11 +1,31 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { UserHarmonyData } from 'src/app/models/userHarmonyData';
+import { DatabaseService } from 'src/app/services/database.service';
+import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
   selector: 'app-friend-list',
   templateUrl: './friend-list.component.html',
   styleUrls: ['./friend-list.component.css']
 })
-export class FriendListComponent {
+export class FriendListComponent implements OnInit {
+
+  constructor(private spotify: SpotifyService, private mongoose: DatabaseService, private ref: ChangeDetectorRef) {
+
+  }
+
+  ngOnInit(): void {
+    this.mongoose.getRecommendedFriends(this.spotify.getCurrentUser().topGenre).subscribe(data => this.showRecommendedFriends(data));
+  }
+
+
+  private showRecommendedFriends(data: UserHarmonyData[]) {
+    this.recommendedFriends = data.filter(user => user.email != this.spotify.getCurrentUser().email);
+    this.ref.detectChanges();
+  }
+
+  recommendedFriends: UserHarmonyData[] = [];
+
   friends = [
     {
       name: 'Tony',
