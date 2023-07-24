@@ -1,4 +1,14 @@
-#homeColumn {
-    width: 33%;
+#recommendedColumn {
+    width: 30%;
+    display:inline-block;
+}
+
+#feedColumn {
+    width: 40%;
+    display:inline-block;
+}
+
+#friendColumn {
+    width: 30%;
     display:inline-block;
 }

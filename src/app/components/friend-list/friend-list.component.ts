@@ -24,6 +24,11 @@ export class FriendListComponent implements OnInit {
     this.ref.detectChanges();
   }
 
+  public refreshRecommendedList(index: number) {
+    this.recommendedFriends.splice(index,1);
+    this.ref.detectChanges();
+  }
+
   recommendedFriends: UserHarmonyData[] = [];
 
   friends = [

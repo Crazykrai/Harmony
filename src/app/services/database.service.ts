@@ -21,5 +21,9 @@ export class DatabaseService {
   public getRecommendedFriends(genre: string) {
     return this.http.get<UserHarmonyData[]>(this.baseURL + '/friends/' + genre);
   }
+
+  public addNewFriend(data: any) {
+    return this.http.post(this.baseURL + '/user/friend', data);
+  }
 }
 

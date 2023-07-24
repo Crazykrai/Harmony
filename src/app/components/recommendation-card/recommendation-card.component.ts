@@ -9,7 +9,7 @@ import { SpotifyService } from 'src/app/services/spotify.service';
   styleUrls: ['./recommendation-card.component.css']
 })
 export class RecommendationCardComponent {
-  @Input() friend: any;
+  @Input() recommendation: any;
   @Input() i: any;
 
   constructor( private spotify: SpotifyService, private mongoose: DatabaseService, private ref: ChangeDetectorRef) {}
@@ -20,15 +20,18 @@ export class RecommendationCardComponent {
   }
 
   ngOnInit() {
-    this.spotify.getUserTopTracks().subscribe(data => this.handleTopTracks(data));
+    //this.spotify.getUserTopTracks().subscribe(data => this.handleTopTracks(data));
+    this.spotify.getSpotifyEmbed(this.recommendation.item).subscribe(
+      data => document.getElementById(this.i)!.innerHTML = data.html
+    );
   }
   private handleTopTracks(data: any) {
     if(data.items[0]) {
-      this.spotify.getSpotifyEmbed(this.friend.recommendation).subscribe(
+      this.spotify.getSpotifyEmbed(this.recommendation.item).subscribe(
         data => document.getElementById(this.i)!.innerHTML = data.html
       );
     } else {
-      this.friend.recommendation = 'Error retrieving favorite song'
+      this.recommendation.item = 'Error retrieving favorite song'
     }
   }
 }

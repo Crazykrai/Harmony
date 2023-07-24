@@ -1,9 +1,12 @@
 <div class="friend-list">
     <app-friend-card
-      *ngFor="let friend of recommendedFriends"
+      *ngFor="let friend of recommendedFriends;index as i"
       [pictureUrl]="friend.imageUrl"
       [friendName]="friend.displayName"
+      [email]="friend.email"
+      [index] = "i"
       [smallPicture]="true"
       [recommendation]="'Also likes ' + friend.topGenre"
+      (friendAdded)="refreshRecommendedList($event)"
     ></app-friend-card>
   </div>
