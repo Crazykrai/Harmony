@@ -36,31 +36,34 @@ mat-card {
   justify-content: center;
 }
 
-.feed-info {
+.feed-name {
   flex: 1;
   display: flex;
   flex-direction: column;
+  margin-top: 30px;
 }
 
-.feed-info p {
+.feed-name p {
   margin-bottom: 8px;
-  font-size: 18px;
+  font-size: 30px;
   font-weight: bold;
 }
 
-.feed-label {
+.feed-caption {
+  max-width: 100%; /* Optional: Adjust the maximum width as per your requirements */
+  width: 80%;
+  height: 100%;
+  padding-bottom: 40px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  resize: none;
+  background-color: rgb(48, 48, 48);
+  font-family: 'Spotify Font', sans-serif;
+  font-size: medium;
+  color: seashell;
 }
 
-.feed-label label {
-  font-weight: bold;
-  margin-right: 8px;
-}
 
-.feed-label span {
-  font-style: italic;
-}
 .spotify-content{
   width:100%
 }

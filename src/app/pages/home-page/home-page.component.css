@@ -16,7 +16,7 @@
 .homePage {
     background-color: rgb(48, 48, 48);
     font-family: 'Spotify Font', sans-serif;
-    height: 100vh;
+    height: auto;
     color: seashell;
 }
 
