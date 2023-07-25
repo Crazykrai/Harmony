@@ -13,6 +13,22 @@
     display: inline-block;
 }
 
+.NameRow {
+    height:Auto
+}
+#feedColumnName {
+    width: 40%;
+    display: inline-block;
+}
+#friendColumnName {
+    width: 30%;
+    display: inline-block;
+}
+#recommendedColumnName {
+    width: 30%;
+    display: inline-block;
+}
+
 .homePage {
     background-color: rgb(48, 48, 48);
     font-family: 'Spotify Font', sans-serif;
