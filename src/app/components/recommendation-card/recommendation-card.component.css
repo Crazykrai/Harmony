@@ -6,6 +6,7 @@ mat-card {
   .recommendation-card-content {
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 90%;
     gap: 16px;
     padding: 16px;
@@ -17,15 +18,15 @@ mat-card {
 
   .recommendation-info p {
     margin-bottom: 8px;
-    font-size: 18px;
+    font-size: 40px;
     font-weight: bold;
     align-items: center;
   }
 
   .recommendation-picture-container {
     
-    width: 80px;
-    height: 80px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -35,14 +36,19 @@ mat-card {
   }
 
   .recommendation-picture {
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 100%;
     object-fit: cover;
+    align-items: center;
+    justify-content: center;
   }
 
   .small-picture {
-    width: 60px;
-    height: 60px;
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    align-items: center;
+    justify-content: center;
   }
 
   .friend-info {
