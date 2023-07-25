@@ -1,14 +1,21 @@
 #recommendedColumn {
     width: 30%;
-    display:inline-block;
+    display: inline-block;
 }
 
 #feedColumn {
     width: 40%;
-    display:inline-block;
+    display: inline-block;
 }
 
 #friendColumn {
     width: 30%;
-    display:inline-block;
+    display: inline-block;
+}
+
+.homePage {
+    background-color: rgb(48, 48, 48);
+    font-family: 'Spotify Font', sans-serif;
+    height: 100vh;
+    color: seashell;
 }

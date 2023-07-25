@@ -12,95 +12,93 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 })
 export class UserProfileComponent implements OnInit {
 
-    constructor( private spotify: SpotifyService, private mongoose: DatabaseService, private ref: ChangeDetectorRef) {}
+  constructor(private spotify: SpotifyService, private mongoose: DatabaseService, private ref: ChangeDetectorRef) { }
 
-    ngOnInit() {
-      this.spotify.getUserProfile().subscribe(data => this.showUserData(data));
-      this.spotify.getUserTopTracks().subscribe(data => this.handleTopTracks(data));
-      this.spotify.getUserTopArtists().subscribe(data => this.handleTopArtists(data));
+  ngOnInit() {
+    this.spotify.getUserProfile().subscribe(data => this.showUserData(data));
+    this.spotify.getUserTopTracks().subscribe(data => this.handleTopTracks(data));
+    this.spotify.getUserTopArtists().subscribe(data => this.handleTopArtists(data));
+  }
+
+  public favoriteSong: string = '';
+
+  public favoriteArtist: string = '';
+
+  favoriteGenre: string = '';
+
+  public userData: UserHarmonyData = {
+    displayName: '',
+    email: '',
+    imageUrl: '',
+    friends: [],
+    posts: [],
+    recommendations: [],
+    topGenre: ''
+  };
+
+  private showUserData(data: UserData) {
+    this.userData.displayName = data.display_name;
+    this.userData.email = data.email;
+    if (data.images[0]) {
+      this.userData.imageUrl = data.images[0].url;
+      const profileImage = new Image();
+      profileImage.src = data.images[0].url;
+      document.getElementById('profile-picture')!.appendChild(profileImage);
+      this.ref.detectChanges();
     }
+    this.saveUserData();
+  }
 
-    public favoriteSong: string = '';
+  private handleTopTracks(data: UserTopSongs) {
+    if (data.items[0]) {
+      this.favoriteSong = data.items[0].name;
+      this.spotify.getSpotifyEmbed(data.items[0].external_urls.spotify).subscribe(
+        data => document.getElementById('fs')!.innerHTML = data.html
+      );
+    } else {
+      this.favoriteSong = 'Error retrieving favorite song'
+    }
+  }
 
-    public favoriteArtist: string = '';
+  private handleTopArtists(data: UserTopArtists) {
+    if (data.items[0]) {
+      this.favoriteArtist = data.items[0].name;
+      this.spotify.getSpotifyEmbed(data.items[0].external_urls.spotify).subscribe(
+        data => {
+          document.getElementById('fa')!.innerHTML = data.html;
+          console.log(data);
+        }
+      );
 
-    favoriteGenre: string = '';
+      const genres: any = data.items.flatMap(item => item.genres);
 
-    public userData: UserHarmonyData = {
-      displayName: '',
-      email: '',
-      imageUrl: '',
-      friends: [],
-      posts: [],
-      recommendations: [],
-      topGenre: ''
-    };
-
-    private showUserData(data: UserData) {
-      this.userData.displayName = data.display_name;
-      this.userData.email = data.email;
-      if(data.images[0]) {
-        this.userData.imageUrl = data.images[0].url;
-        const profileImage = new Image();
-        profileImage.src = data.images[0].url;
-        document.getElementById('avatar')!.appendChild(profileImage);
-        this.ref.detectChanges();
+      var mf = 1;
+      var m = 0;
+      for (var i = 0; i < genres.length; i++) {
+        for (var j = i; j < genres.length; j++) {
+          if (genres[i] == genres[j])
+            m++;
+          if (mf < m) {
+            mf = m;
+            this.userData.topGenre = genres[i];
+          }
+        }
+        m = 0;
       }
       this.saveUserData();
+    } else {
+      this.favoriteArtist = 'Error retrieving favorite artist'
     }
+  }
 
-    private handleTopTracks(data: UserTopSongs) {
-      if(data.items[0]) {
-        this.favoriteSong = data.items[0].name;
-        this.spotify.getSpotifyEmbed(data.items[0].external_urls.spotify).subscribe(
-          data => document.getElementById('fs')!.innerHTML = data.html
-        );
-      } else {
-        this.favoriteSong = 'Error retrieving favorite song'
-      }
+  private saveUserData() {
+    if (this.userData.topGenre != '' && this.userData.displayName != '') {
+      this.spotify.setCurrentUser(this.userData);
+      this.mongoose.createNewUser(this.userData);
     }
-    
-    private handleTopArtists(data: UserTopArtists) {
-      if(data.items[0]) {
-        this.favoriteArtist = data.items[0].name;
-        this.spotify.getSpotifyEmbed(data.items[0].external_urls.spotify).subscribe(
-          data => {
-            document.getElementById('fa')!.innerHTML = data.html;
-            console.log(data);
-          }
-        );
-
-        const genres: any = data.items.flatMap(item => item.genres);
-        
-        var mf = 1;
-        var m = 0;
-        for (var i=0; i<genres.length; i++) {
-                for (var j=i; j<genres.length; j++)
-                {
-                        if (genres[i] == genres[j])
-                        m++;
-                        if (mf<m)
-                        {
-                          mf=m; 
-                          this.userData.topGenre = genres[i];
-                        }
-                }
-                m=0;
-        }
-        this.saveUserData();
-      } else {
-        this.favoriteArtist = 'Error retrieving favorite artist'
-      }
-    }
-
-    private saveUserData() {
-      if(this.userData.topGenre != '' && this.userData.displayName != '') {
-        this.spotify.setCurrentUser(this.userData);
-        this.mongoose.createNewUser(this.userData);
-      }
-    }
-    
+  }
 
 
-    
+
+
 }

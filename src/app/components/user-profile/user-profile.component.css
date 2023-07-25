@@ -1,0 +1,19 @@
+#profilePage {
+    background-color: rgb(48, 48, 48);
+    font-family: 'Spotify Font', sans-serif;
+    font-size: medium;
+    color: seashell;
+    height: 100vh;
+
+}
+
+.profile-picture-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 5%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e1e1e1;
+}

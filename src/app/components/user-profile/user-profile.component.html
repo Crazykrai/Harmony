@@ -1,10 +1,15 @@
-<div id="avatar"></div>
-<h1>{{userData.displayName}}</h1>
-<h3>{{userData.email}}</h3>
-<h3>Favorite Song: {{favoriteSong}}
-    
-</h3>
-<div id="fs" style="width:50%; margin-left:25%;"></div>
-<h3>Favorite Artist: {{favoriteArtist}}
-</h3>
-<div id="fa" style="width:50%; margin-left:25%;"></div>
+<body id="profilePage">
+    <div class="profile-picture-container">
+        <img [src]="this.userData.imageUrl" alt="Profile Picture" id="profile-picture"
+            [ngClass]="{ 'large-picture': 'true' }" />
+    </div>
+    <h1><span>Username: </span>{{userData.displayName}}</h1>
+    <h3><span>Email: </span>{{userData.email}}</h3>
+    <h3><span>Favorite Song: </span> {{favoriteSong}}
+
+    </h3>
+    <div id="fs" style="width:50%; margin-left:25%;"></div>
+    <h3>Favorite Artist: {{favoriteArtist}}
+    </h3>
+    <div id="fa" style="width:50%; margin-left:25%;"></div>
+</body>

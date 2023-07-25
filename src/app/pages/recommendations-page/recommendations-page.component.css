@@ -1,4 +1,8 @@
 #recommendationsColumn {
     width: 100%;
-    display:inline-block;
+    padding-top: 10px;
+    display: inline-block;
+    background-color: rgb(48, 48, 48);
+    font-family: 'Spotify Font', sans-serif;
+    color: seashell;
 }

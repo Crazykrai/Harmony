@@ -1,7 +1,12 @@
 .recommendation-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding-left: 15%;
-    padding-right: 15%;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-left: 15%;
+  padding-right: 15%;
+  background-color: rgb(48, 48, 48);
+  font-family: 'Spotify Font', sans-serif;
+  font-size: medium;
+  color: seashell;
+  height: 100vh;
+}
