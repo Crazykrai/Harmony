@@ -50,9 +50,7 @@ mat-card {
     display: flex;
     flex-direction: column;
   }
-
   
-
   .recommendation-label {
     display: flex;
     align-items: center;

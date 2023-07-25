@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 import { FriendCardComponent } from './components/friend-card/friend-card.component';
 import { FriendListComponent } from './components/friend-list/friend-list.component';
@@ -34,7 +36,7 @@ import { RecommendationListComponent } from './components/recommendation-list/re
     RecommendationsPageComponent,
     NavbarComponent,
     RecommendationCardComponent,
-    RecommendationListComponent
+    RecommendationListComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,8 @@ import { RecommendationListComponent } from './components/recommendation-list/re
     MatToolbarModule,
     MatIconModule,
     AppRoutingModule,
+    NgbModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

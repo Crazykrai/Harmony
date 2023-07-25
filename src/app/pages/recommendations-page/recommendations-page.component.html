@@ -1,6 +1,37 @@
 <div class="recommendations-page">
-    <div id="recommendationsColumn">
+    <div id="PageHeader">
         <h2>Recommendations</h2>
+        <button mat-raised-button color="accent" (click)="openModal()">Send Recommendation</button>
+    </div>
+    <!-- The modal -->
+    <ng-template #content let-modal>
+        <div class="modal-overlay">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h4 class="modal-title">Send Reccomendation</h4>
+                </div>
+                <div class="modal-body">                    
+                    <div class="form-group">
+                        <label for="friendDropdown">Select Friend:</label>
+                        <select id="friendDropdown" class="form-control" [(ngModel)]="selectedFriend">
+                            <option disabled selected value="">Select Friend</option>
+                            <option *ngFor="let friend of friends" [value]="friend">{{ friend }}</option>
+                        </select>
+                    </div>
+                    <label for="SongNameTextArea">Enter Song Name:</label>
+                    <textarea id="SongNameTextArea" [(ngModel)]="inputText" placeholder="Enter text here" class="form-control"></textarea>
+                </div>
+                <div class="spotify-content" id="{{RecommendedSongID}}"></div>
+                <div class="modal-footer">
+                    <button mat-raised-button color="accent" (click)="search()">Search</button>
+                    <button mat-raised-button color="accent" (click)="dismissModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <div id="recommendationsColumn">
         <app-recommendation-list></app-recommendation-list>
     </div>
 </div>
+
+
