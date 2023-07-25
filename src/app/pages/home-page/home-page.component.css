@@ -19,3 +19,11 @@
     height: 100vh;
     color: seashell;
 }
+
+.friends-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-left: 15%;
+    padding-right: 15%;
+}

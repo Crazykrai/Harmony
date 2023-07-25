@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserHarmonyData } from 'src/app/models/userHarmonyData';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
@@ -10,22 +10,28 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 })
 export class FriendListComponent implements OnInit {
 
+  @Output() friendAdded = new EventEmitter();
+
   constructor(private spotify: SpotifyService, private mongoose: DatabaseService, private ref: ChangeDetectorRef) {
 
   }
 
   ngOnInit(): void {
-    this.mongoose.getRecommendedFriends(this.spotify.getCurrentUser().topGenre).subscribe(data => this.showRecommendedFriends(data));
+    this.mongoose.getUserData(this.spotify.getCurrentUser().email).subscribe(data => {
+      this.spotify.setCurrentUser(data);
+      this.mongoose.getRecommendedFriends(this.spotify.getCurrentUser().topGenre).subscribe(data => this.showRecommendedFriends(data));
+    })
   }
 
 
   private showRecommendedFriends(data: UserHarmonyData[]) {
-    this.recommendedFriends = data.filter(user => user.email != this.spotify.getCurrentUser().email);
+    this.recommendedFriends = data.filter(user => (user.email != this.spotify.getCurrentUser().email) && !(this.spotify.getCurrentUser().friends.includes(user.email)));
     this.ref.detectChanges();
   }
 
   public refreshRecommendedList(index: number) {
     this.recommendedFriends.splice(index,1);
+    this.friendAdded.emit();
     this.ref.detectChanges();
   }
 

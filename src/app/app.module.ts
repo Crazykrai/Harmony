@@ -22,6 +22,7 @@ import { RecommendationsPageComponent } from './pages/recommendations-page/recom
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RecommendationCardComponent } from './components/recommendation-card/recommendation-card.component';
 import { RecommendationListComponent } from './components/recommendation-list/recommendation-list.component';
+import { ActualFriendCardComponent } from './components/actual-friend-card/actual-friend-card.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { RecommendationListComponent } from './components/recommendation-list/re
     NavbarComponent,
     RecommendationCardComponent,
     RecommendationListComponent,
+    ActualFriendCardComponent
   ],
   imports: [
     BrowserModule,

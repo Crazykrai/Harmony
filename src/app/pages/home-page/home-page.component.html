@@ -1,7 +1,7 @@
 <div class="homePage">
     <div id="recommendedColumn">
         <h2>Recommended Friends</h2>
-        <app-friend-list></app-friend-list>
+        <app-friend-list (friendAdded)="getFriends()"></app-friend-list>
     </div>
     <div id="feedColumn">
         <h2>Feed</h2>
@@ -9,6 +9,14 @@
     </div>
     <div id="friendColumn">
         <h2>Friends</h2>
-        <!-- <app-friend-list></app-friend-list> -->
+        <div class="friends-list">
+            <app-actual-friend-card 
+            *ngFor="let friend of friends"
+            [pictureUrl]="friend.imageUrl"
+            [friendName]="friend.displayName"
+            [email]="friend.email"
+            [smallPicture]="true"
+            ></app-actual-friend-card>
+          </div>
     </div>
 </div>

@@ -15,7 +15,7 @@ export class DatabaseService {
   }
 
   public getUserData(email: string) {
-    this.http.get<UserHarmonyData>(this.baseURL + '/user/' + email).subscribe(data => console.log(data));
+    return this.http.get<UserHarmonyData>(this.baseURL + '/user/' + email);
   }
 
   public getRecommendedFriends(genre: string) {
@@ -24,6 +24,10 @@ export class DatabaseService {
 
   public addNewFriend(data: any) {
     return this.http.post(this.baseURL + '/user/friend', data);
+  }
+
+  public getUserFriendData(email: string) {
+    return this.http.get<UserHarmonyData[]>(this.baseURL + '/user/friend/' + email);
   }
 }
 

@@ -1,0 +1,11 @@
+<mat-card>
+    <div class="friend-card-content">
+      <div class="friend-picture-container">
+        <img [src]="pictureUrl" alt="Friend's Picture" class="friend-picture" [ngClass]="{ 'small-picture': smallPicture }" />
+      </div>
+      <div class="friend-info">
+        <p>{{ friendName }}</p>
+        <button mat-raised-button color="accent" (click)="sendRecommendation()">Recommend</button>
+      </div>
+    </div>
+</mat-card>
