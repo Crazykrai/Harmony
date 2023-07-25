@@ -1,0 +1,66 @@
+mat-card {
+  margin-bottom: 16px;
+}
+
+.feed-card-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.feed-picture-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e1e1e1;
+}
+
+.feed-picture {
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+  align-items: center;
+  justify-content: center;
+}
+
+.small-picture {
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+  align-items: center;
+  justify-content: center;
+}
+
+.feed-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.feed-info p {
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.feed-label {
+  display: flex;
+  align-items: center;
+}
+
+.feed-label label {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.feed-label span {
+  font-style: italic;
+}
+.spotify-content{
+  width:100%
+}

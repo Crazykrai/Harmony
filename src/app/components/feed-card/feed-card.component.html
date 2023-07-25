@@ -1,0 +1,15 @@
+<mat-card>
+    <div class="feed-card-content">
+      <div class="spotify-content" id="{{i}}"></div>
+    </div>
+    <div class="feed-card-content">
+      <div class="feed-info">
+        <p>{{ feed.name }}</p>
+        <div class="feed-picture-container">
+          <img [src]="feed.pictureUrl" alt="Friend's Picture" class="feed-picture"
+            [ngClass]="{ 'small-picture': 'true' }" />
+        </div>
+      </div>
+      
+    </div>
+  </mat-card>

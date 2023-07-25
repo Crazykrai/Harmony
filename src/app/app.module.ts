@@ -23,6 +23,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { RecommendationCardComponent } from './components/recommendation-card/recommendation-card.component';
 import { RecommendationListComponent } from './components/recommendation-list/recommendation-list.component';
 import { ActualFriendCardComponent } from './components/actual-friend-card/actual-friend-card.component';
+import { FeedCardComponent } from './components/feed-card/feed-card.component';
+import { FeedListComponent } from './components/feed-list/feed-list.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { ActualFriendCardComponent } from './components/actual-friend-card/actua
     NavbarComponent,
     RecommendationCardComponent,
     RecommendationListComponent,
-    ActualFriendCardComponent
+    ActualFriendCardComponent,
+    FeedCardComponent,
+    FeedListComponent
   ],
   imports: [
     BrowserModule,
