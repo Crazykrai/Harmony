@@ -57,7 +57,7 @@ mat-card {
   display: flex;
   flex-direction: column;
   resize: none;
-  background-color: rgb(48, 48, 48);
+  background-color: #424242;
   font-family: 'Spotify Font', sans-serif;
   font-size: medium;
   color: seashell;

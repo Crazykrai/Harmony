@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
@@ -13,10 +14,51 @@ export class ActualFriendCardComponent {
   @Input() friendName: string | null = null;
   @Input() smallPicture: boolean = false;
 
-  constructor(private spotify: SpotifyService, private mongoose: DatabaseService) {}
+
+  constructor(private modalService: NgbModal, private spotify: SpotifyService, private mongoose: DatabaseService) {}
+
+  chosenType: string = 'track';
+  spotifyQuery: string = '';
+  @ViewChild('content') modalContent: any; // ViewChild to reference the modal template
+  modalRef!: NgbModalRef; // Declare modalRef property of type NgbModalRef
+  RecommendedSongID: string = '';
+
+  searchResults: any[] = [];
+
+  chosenItem: any;
 
   public sendRecommendation() {
 
+  }
+
+  openModal() {
+    this.modalRef = this.modalService.open(this.modalContent); // Open the modal and store the reference in modalRef
+  }
+
+  dismissModal() {
+    this.modalRef.dismiss();
+  }
+
+  displaySelectedItem(item: any) {
+    console.log('displaying selected item');
+    console.log(item);
+    this.spotify.getSpotifyEmbed(item.value.external_urls.spotify).subscribe(data => document.getElementById('searchResult')!.innerHTML = data.html);
+  }
+
+  search() {
+    // Implement your search functionality here
+    console.log('Searching for:', this.spotifyQuery);
+    this.spotify.searchSpotify(this.spotifyQuery,this.chosenType).subscribe(data => {
+      console.log(data);
+      if(this.chosenType=='track') {
+        this.searchResults = data.tracks.items;
+      } else if(this.chosenType=='artist') {
+        this.searchResults = data.artists.items;
+      } else {
+        this.searchResults = data.albums.items;
+      }
+      console.log(this.searchResults);
+    });
   }
 
 }
