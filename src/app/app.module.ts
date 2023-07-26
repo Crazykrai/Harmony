@@ -25,7 +25,9 @@ import { RecommendationListComponent } from './components/recommendation-list/re
 import { ActualFriendCardComponent } from './components/actual-friend-card/actual-friend-card.component';
 import { FeedCardComponent } from './components/feed-card/feed-card.component';
 import { FeedListComponent } from './components/feed-list/feed-list.component';
-
+import { MessageListComponent } from './components/message-list/message-list.component';
+import { MessageInputComponent } from './components/message-input/message-input.component';
+import { MessageService } from 'src/app/message.serivce';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { FeedListComponent } from './components/feed-list/feed-list.component';
     RecommendationListComponent,
     ActualFriendCardComponent,
     FeedCardComponent,
-    FeedListComponent
+    FeedListComponent,
+    MessageListComponent,
+    MessageInputComponent
   ],
   imports: [
     BrowserModule,
@@ -55,8 +59,9 @@ import { FeedListComponent } from './components/feed-list/feed-list.component';
     AppRoutingModule,
     NgbModule,
     FormsModule,
+   
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

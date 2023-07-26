@@ -1,0 +1,170 @@
+/* message-list.component.css */
+
+.message-container {
+    display: flex-row;
+    height: 100%;
+    background-color: black;
+
+  }
+  
+  .friends-list {
+    flex: 1;
+    padding: 10px;
+    background-color:#424242;
+    
+    float: left;
+    width: 40%;
+    margin: 16px;
+    border-radius: 16px;
+  
+  }
+  
+  .friends-list h3 {
+    margin-top: 0;
+    color:white;
+    font-size: 25px;
+    font-weight: bold; 
+  }
+  
+  .friends-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .friends-list li {
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .friends-list li.selected {
+    background-color: #69f0ae;
+  }
+  
+
+  .message-window {
+    flex: 2;
+    padding: 10px;
+    overflow-y: auto;
+    background-color:#424242;
+    float: right;
+    width: 40%;
+    margin: 16px;
+    border-radius: 16px;
+  }
+  .message-window h3 {
+    margin-top: 0;
+    color:white;
+    font-size: 20px;
+     
+  }
+  .user-message {
+    background-color: #69f0ae;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .friend-message {
+    background-color: #f0f0f0;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  /* Optional styles for better visual appearance */
+  .message-window p {
+    margin: 0;
+  }
+  
+  .message-window small {
+    font-size: 10px;
+    color: #888;
+  }
+  
+  .message-window div + div {
+    margin-top: 10px;
+  }
+  
+  .message-container {
+    height: 400px;
+  }
+  .friend-picture-container {
+    
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e1e1e1;
+  }
+
+  .friend-picture {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .small-picture {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    align-items: center;
+    justify-content: center;
+  }
+  /* message-list.component.css */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  cursor: pointer;
+  display: flex; /* Display list items as flex containers */
+  align-items: center; /* Vertically align items (name and picture) in the center */
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.friend-info {
+  flex: 1; /* Allow the friend name to take up the remaining space */
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  margin-left: 10px;
+
+}
+
+.friend-info span {
+  margin-right: 10px; /* Add spacing between name and picture */
+  font-size: 20px;
+  color:white;
+}
+
+.friend-picture-container {
+  width: 50px; /* Set a smaller width for the container */
+  height: 50px; /* Set a smaller height for the container */
+  flex-shrink: 0; /* Prevent the picture from shrinking to fit */
+}
+
+.friend-picture {
+  width: 100%; /* Set the width of the picture (adjust as needed) */
+  height: 100%; /* Set the height of the picture (adjust as needed) */
+  border-radius: 50%; /* Make the picture circular */
+}
+/* Add any additional styles for the user's messages and friend's messages */
+.user-message-info,
+.friend-message-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px; /* Add spacing between messages */
+}
+
+.user-message-info .user-picture-container {
+  margin-right: 5px; /* Add spacing between the user's picture and message */
+}
+
+.friend-message-info .friend-picture-container {
+  margin-left: 5px; /* Add spacing between the friend's picture and message */
+}

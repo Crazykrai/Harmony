@@ -4,6 +4,8 @@ import { UserHarmonyData } from 'src/app/models/userHarmonyData';
 import { UserTopArtists, UserTopSongs } from 'src/app/models/userTopItems';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
+import { Router } from '@angular/router';
+import { UserProfileService } from 'src/app/user-profile.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,13 +13,16 @@ import { SpotifyService } from 'src/app/services/spotify.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-
-  constructor(private spotify: SpotifyService, private mongoose: DatabaseService, private ref: ChangeDetectorRef) { }
+  @Input() imageUrl: string = '';
+  constructor(private spotify: SpotifyService, private mongoose: DatabaseService, private ref: ChangeDetectorRef, private userProfileService: UserProfileService) { }
 
   ngOnInit() {
     this.spotify.getUserProfile().subscribe(data => this.showUserData(data));
     this.spotify.getUserTopTracks().subscribe(data => this.handleTopTracks(data));
     this.spotify.getUserTopArtists().subscribe(data => this.handleTopArtists(data));
+  
+    //this.userProfileService.setUserProfileData(data);
+    this.userProfileService.setImageUrl(this.imageUrl);
   }
 
   public favoriteSong: string = '';

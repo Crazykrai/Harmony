@@ -1,0 +1,55 @@
+<!-- message-list.component.html -->
+<div class="row" style="width: 100%;">
+  <div class="col-4 friends-list">
+    <h3>Friends List</h3>
+    <ul>
+      
+      <li *ngFor="let friend of friends" (click)="onSelectFriend(friend)" [class.selected]="selectedFriend?.id === friend.id">
+        <div class="friend-info">
+          <div class="friend-picture-container">
+            <img [src]="friend.pictureUrl" alt="Friend's Picture" class="friend-picture"
+              [ngClass]="{ 'small-picture': 'true' }" />
+          </div>
+          
+          <span>{{ friend.name }}</span> 
+        </div>
+         
+      </li>
+    </ul>
+   
+  </div>
+  <div class="col-8 message-window">
+   <h3 *ngIf="selectedFriend">Messages with {{ selectedFriend.name }}</h3>
+   <div *ngIf="selectedFriend">
+     <div *ngFor="let message of getMessagesWithSelectedFriend()" [ngClass]="{ 'user-message': message.senderId === 1, 'friend-message': message.senderId !== 1 }">
+        <div *ngIf="message.senderId === 1" class="user-message-info">
+          <div class="user-picture-container">
+            <img [src]="userProfilePictureUrl" alt="User's Picture" class="user-picture" [ngClass]="{ 'small-picture': true }" />
+          </div>
+          <p>{{ message.text }}</p>
+        </div>
+      <div *ngIf="message.senderId !== 1" class="friend-message-info">
+        <div class="friend-picture-container">
+          <img [src]="selectedFriend.pictureUrl" alt="Friend's Picture" class="friend-picture" [ngClass]="{ 'small-picture': true }" />
+        </div>
+        <p>{{ message.text }}</p>
+      </div>
+       <small>{{ message.timestamp | date:'short' }}</small>
+     </div>
+     <div class="message-input">
+       <textarea [(ngModel)]="messageText" placeholder="Type your message..."></textarea>
+       <button (click)="onSendMessage()">Send</button>
+     </div>
+   </div>
+   <div *ngIf="!selectedFriend">
+     <p style="color: white;">No friend selected.</p>
+   </div>
+   
+  </div>
+  
+
+  
+</div>
+
+
+
