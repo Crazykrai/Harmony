@@ -13,7 +13,6 @@ export class RecommendationListComponent implements OnInit {
 
   ngOnInit(): void {
     this.mongoose.getRecommendations(this.spotify.getCurrentUser().email).subscribe(data => {
-      console.log(data);
       this.recommendationsList = data;
     })
   }

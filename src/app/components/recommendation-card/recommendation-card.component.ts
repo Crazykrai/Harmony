@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { SpotifyRecommendation } from 'src/app/models/spotifyRecommendation';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
@@ -9,7 +10,12 @@ import { SpotifyService } from 'src/app/services/spotify.service';
   styleUrls: ['./recommendation-card.component.css']
 })
 export class RecommendationCardComponent {
-  @Input() recommendation: any;
+  @Input() recommendation: SpotifyRecommendation = {
+    spotifyUrl: '',
+    spotifyUri: '',
+    senderImage: '',
+    senderName: ''
+  };
   @Input() i: any;
   
 
@@ -22,7 +28,7 @@ export class RecommendationCardComponent {
 
   ngOnInit() {
     //this.spotify.getUserTopTracks().subscribe(data => this.handleTopTracks(data));
-    this.spotify.getSpotifyEmbed(this.recommendation.item).subscribe(
+    this.spotify.getSpotifyEmbed(this.recommendation.spotifyUrl).subscribe(
       data => document.getElementById(this.i)!.innerHTML = data.html
     );
   }
