@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserHarmonyData } from 'src/app/models/userHarmonyData';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home-page',
@@ -11,7 +12,7 @@ import { SpotifyService } from 'src/app/services/spotify.service';
 })
 export class HomePageComponent implements OnInit {
   
-  constructor(private spotify: SpotifyService, private mongoose: DatabaseService, private router: Router, private ref: ChangeDetectorRef) {
+  constructor(private modalService: NgbModal, private spotify: SpotifyService, private mongoose: DatabaseService, private router: Router, private ref: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -23,6 +24,25 @@ export class HomePageComponent implements OnInit {
   }
 
   public friends: UserHarmonyData[] = [];
+  inputText: string = '';
+  @ViewChild('content') modalContent: any; // ViewChild to reference the modal template
+  modalRef!: NgbModalRef; // Declare modalRef property of type NgbModalRef
+  AttachID: string = '';
+  selectedFriend: string = ''; // To store the selected friend
+
+  openModal() {
+    this.modalRef = this.modalService.open(this.modalContent); // Open the modal and store the reference in modalRef
+  }
+
+  dismissModal() {
+    this.modalRef.dismiss();
+  }
+
+  post() {
+    // Implement your search functionality here
+    console.log('Posting with caption:', this.inputText);
+    this.dismissModal(); // Close the modal after performing the search (you can remove this if you want to keep the modal open)
+  }
 
   public getFriends() {
     this.mongoose.getUserFriendData(this.spotify.getCurrentUser().email).subscribe(data => {

@@ -50,7 +50,7 @@ mat-card {
 }
 
 .feed-caption {
-  max-width: 100%; /* Optional: Adjust the maximum width as per your requirements */
+  max-width: 100%; 
   width: 80%;
   height: 100%;
   padding-bottom: 40px;
