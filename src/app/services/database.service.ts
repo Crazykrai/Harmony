@@ -27,8 +27,8 @@ export class DatabaseService {
     return this.http.post(this.baseURL + '/user/friend', data);
   }
 
-  public addRecommendation(data: SpotifyRecommendation, email: string) {
-    return this.http.post(this.baseURL + '/user/' + email + '/recommendation', data);
+  public addRecommendation(recommendation: SpotifyRecommendation, email: string) {
+    return this.http.post(this.baseURL + '/user/' + email + '/recommendation', recommendation);
   }
 
   public getUserFriendData(email: string) {
