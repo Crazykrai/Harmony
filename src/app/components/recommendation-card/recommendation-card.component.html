@@ -1,12 +1,12 @@
 <mat-card>
   <div class="recommendation-card-content">
     <div class="recommendation-info">
-      <p>{{ recommendation.name }}</p>
+      <p>{{ recommendation.senderName }}</p>
     </div>
   </div>
   <div class="recommendation-card-content">
     <div class="recommendation-picture-container">
-      <img [src]="recommendation.pictureUrl" alt="Friend's Picture" class="recommendation-picture"
+      <img [src]="recommendation.senderImage" alt="Friend's Picture" class="recommendation-picture"
         [ngClass]="{ 'small-picture': 'true' }" />
     </div>
     <div class="spotify-content" id="{{i}}"></div>
