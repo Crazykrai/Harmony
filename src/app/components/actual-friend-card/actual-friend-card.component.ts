@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { SpotifyRecommendation } from 'src/app/models/spotifyRecommendation';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
 
@@ -28,7 +29,16 @@ export class ActualFriendCardComponent {
   chosenItem: any;
 
   public sendRecommendation() {
-
+    const recommendation: SpotifyRecommendation = {
+      spotifyUrl: this.chosenItem.external_urls.spotify,
+      spotifyUri: this.chosenItem.uri,
+      senderName: this.spotify.getCurrentUser().displayName,
+      senderImage: this.spotify.getCurrentUser().imageUrl
+    };
+    this.mongoose.addRecommendation(recommendation,this.email).subscribe(data => {
+      console.log(data, 'Recommendation Sent');
+      this.dismissModal();
+    });
   }
 
   openModal() {
@@ -42,6 +52,7 @@ export class ActualFriendCardComponent {
   displaySelectedItem(item: any) {
     console.log('displaying selected item');
     console.log(item);
+    this.chosenItem = item.value;
     this.spotify.getSpotifyEmbed(item.value.external_urls.spotify).subscribe(data => document.getElementById('searchResult')!.innerHTML = data.html);
   }
 

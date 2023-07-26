@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserHarmonyData } from '../models/userHarmonyData';
+import { SpotifyRecommendation } from '../models/spotifyRecommendation';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,16 @@ export class DatabaseService {
     return this.http.post(this.baseURL + '/user/friend', data);
   }
 
+  public addRecommendation(data: SpotifyRecommendation, email: string) {
+    return this.http.post(this.baseURL + '/user/' + email + '/recommendation', data);
+  }
+
   public getUserFriendData(email: string) {
     return this.http.get<UserHarmonyData[]>(this.baseURL + '/user/friend/' + email);
+  }
+
+  public getRecommendations(email: string) {
+    return this.http.get<SpotifyRecommendation[]>(this.baseURL + '/user/recommendations/' + email);
   }
 }
 
