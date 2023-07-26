@@ -22,7 +22,7 @@ export class LoginPageComponent implements OnInit {
   
   title = 'Harmony';
   clientId = '';
-  scope = 'user-read-private user-read-email user-top-read';
+  scope = 'user-read-private user-read-email user-top-read playlist-read-private playlist-modify-private playlist-modify-public';
   SPOTIFY_AUTHORIZE_URL = 'https://accounts.spotify.com/authorize';
 
   code: any;

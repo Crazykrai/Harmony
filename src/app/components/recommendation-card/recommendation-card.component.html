@@ -10,7 +10,32 @@
         [ngClass]="{ 'small-picture': 'true' }" />
     </div>
     <div class="spotify-content" id="{{i}}"></div>
-    <button mat-raised-button color="accent" (click)="addToPlaylist()">Add To Playlist</button>
+    <button mat-raised-button color="accent" (click)="openModal()">Add To Playlist</button>
     <button mat-raised-button color="accent" (click)="addToPlaylist()">X</button>
   </div>
 </mat-card>
+
+<ng-template #content let-modal>
+  <div class="modal-overlay">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h4 class="modal-title">Add to Playlist</h4>
+      </div>
+      <div class="modal-body">
+        <mat-form-field>
+          <mat-label>Playlists</mat-label>
+          <mat-select [(value)]="chosenPlaylist">
+            <mat-option *ngFor="let playlist of playlists.items" [value]="playlist">
+              {{playlist.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="spotify-content" id="searchResult"></div>
+      <div class="modal-footer">
+        <button mat-raised-button color="accent" (click)="addToPlaylist()">Add</button>
+        <button mat-raised-button color="accent" (click)="dismissModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -48,7 +48,7 @@ export class HomePageComponent implements OnInit {
     console.log('displaying selected item');
     console.log(item);
     this.chosenItem = item.value;
-    this.spotify.getSpotifyEmbed(item.value.external_urls.spotify).subscribe(data => document.getElementById('searchResult')!.innerHTML = data.html);
+    this.spotify.getSpotifyEmbed(item.value.external_urls.spotify).subscribe(data => document.getElementById('postSearchResult')!.innerHTML = data.html);
   }
 
   search() {

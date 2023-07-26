@@ -1,4 +1,5 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
@@ -8,7 +9,7 @@ import { SpotifyService } from 'src/app/services/spotify.service';
   templateUrl: './recommendations-page.component.html',
   styleUrls: ['./recommendations-page.component.css']
 })
-export class RecommendationsPageComponent {
+export class RecommendationsPageComponent implements OnInit {
   inputText: string = '';
   @ViewChild('content') modalContent: any; // ViewChild to reference the modal template
   modalRef!: NgbModalRef; // Declare modalRef property of type NgbModalRef
@@ -23,7 +24,12 @@ export class RecommendationsPageComponent {
 
   friends: string[] = ['Friend 1', 'Friend 2', 'Friend 3', 'Friend 4']; // Update this array with your list of friends
 
-  constructor(private spotify: SpotifyService, private modalService: NgbModal) { }
+  constructor(private spotify: SpotifyService, private modalService: NgbModal, private router: Router) { }
+  ngOnInit(): void {
+    if(!this.spotify.isAuthorized()) {
+      this.router.navigate(['']);
+    }
+  }
 
   openModal() {
     this.modalRef = this.modalService.open(this.modalContent); // Open the modal and store the reference in modalRef

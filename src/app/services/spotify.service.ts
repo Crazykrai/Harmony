@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SpotifyToken } from '../models/spotify-token';
@@ -118,6 +118,16 @@ export class SpotifyService {
   public searchSpotify(query: string, type: string) {
 
     return this.http.get<any>('https://api.spotify.com/v1/search?q=' + query + '&type=' + type + '&limit=10', {
+      headers: {
+        'Authorization': 'Bearer ' + this.accessToken
+      },
+    });
+  }
+
+  public addtoPlaylist(playlistId: string, songUri: string) {
+    return this.http.post('https://api.spotify.com/v1/playlists/' + playlistId + '/tracks',{
+      uris: [songUri]
+    },{
       headers: {
         'Authorization': 'Bearer ' + this.accessToken
       },

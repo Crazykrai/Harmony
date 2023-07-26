@@ -97,11 +97,11 @@ export class UserProfileComponent implements OnInit {
   private showUserData(data: UserData) {
     this.userData.displayName = data.display_name;
     this.userData.email = data.email;
-    if (data.images[0]) {
-      this.userData.imageUrl = data.images[0].url;
-      const profileImage = new Image();
-      profileImage.src = data.images[0].url;
-      document.getElementById('profile-picture')!.appendChild(profileImage);
+    if (data.images[1]) {
+      this.userData.imageUrl = data.images[1].url;
+      // const profileImage = new Image();
+      // profileImage.src = data.images[1].url;
+      //document.getElementById('profile-picture-container')!.appendChild(profileImage);
       this.ref.detectChanges();
     }
     this.saveUserData();

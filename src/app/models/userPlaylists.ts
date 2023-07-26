@@ -1,5 +1,5 @@
 export interface UserPlaylists {
-    items: PlaylistItem
+    items: PlaylistItem[]
 }
 
 interface PlaylistItem {
