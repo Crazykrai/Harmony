@@ -1,11 +1,11 @@
-#example-spacer {
+#example-spacer1 {
   width: 100px;
+}
+
+#example-spacer2 {
+  width: 60lvw;
 }
 
 a {
   font-size: 20px;
-}
-
-#profileLink {
-  margin-left: 60em;
 }

@@ -1,15 +1,16 @@
 <mat-card>
-    <div class="friend-card-content">
-      <div class="friend-picture-container">
-        <img [src]="pictureUrl" alt="Friend's Picture" class="friend-picture" [ngClass]="{ 'small-picture': smallPicture }" />
-      </div>
-      <div class="friend-info">
-        <p>{{ friendName }}</p>
-        <div class="recommendation-label">
-          <label>Reason:</label>
-          <span>{{ recommendation }}</span>
-        </div>
-        <button mat-raised-button color="accent" (click)="addFriend()">Add Friend</button>
-      </div>
+  <div class="friend-card-content">
+    <div class="friend-picture-container">
+      <img [src]="pictureUrl" alt="Friend's Picture" class="friend-picture"
+        [ngClass]="{ 'small-picture': smallPicture }" />
     </div>
-  </mat-card>
+    <div class="friend-info">
+      <p>{{ friendName }}</p>
+      <div class="recommendation-label">
+        <label>Reason:</label>
+        <span>{{ recommendation }}</span>
+      </div>
+      <button mat-raised-button color="accent" (click)="addFriend()">Add Friend</button>
+    </div>
+  </div>
+</mat-card>

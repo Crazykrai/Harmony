@@ -1,23 +1,81 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, ViewChild, Component, Input, OnInit } from '@angular/core';
 import { UserData } from 'src/app/models/userData';
 import { UserHarmonyData } from 'src/app/models/userHarmonyData';
 import { UserTopArtists, UserTopSongs } from 'src/app/models/userTopItems';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { SpotifyRecommendation } from 'src/app/models/spotifyRecommendation';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.css'],
 })
+
 export class UserProfileComponent implements OnInit {
 
-  constructor(private spotify: SpotifyService, private mongoose: DatabaseService, private ref: ChangeDetectorRef) { }
+  constructor(private spotify: SpotifyService, private mongoose: DatabaseService, private ref: ChangeDetectorRef, private modalService: NgbModal) { }
+
+  chosenType: string = 'track';
+  spotifyQuery: string = '';
+  @ViewChild('content') modalContent: any; // ViewChild to reference the modal template
+  modalRef!: NgbModalRef; // Declare modalRef property of type NgbModalRef
+  ChosenSongID: string = '';
+
+  searchResults: any[] = [];
+
+  chosenItem: any;
 
   ngOnInit() {
     this.spotify.getUserProfile().subscribe(data => this.showUserData(data));
     this.spotify.getUserTopTracks().subscribe(data => this.handleTopTracks(data));
     this.spotify.getUserTopArtists().subscribe(data => this.handleTopArtists(data));
+  }
+
+  //  inputText: string = '';
+  //  @ViewChild('content') modalContent: any; // ViewChild to reference the modal template
+  // modalRef!: NgbModalRef; // Declare modalRef property of type NgbModalRef
+  openModal() {
+    this.modalRef = this.modalService.open(this.modalContent); // Open the modal and store the reference in modalRef
+  }
+
+  dismissModal() {
+    this.modalRef.dismiss();
+  }
+
+  displaySelectedItem(item: any) {
+    console.log('displaying selected item');
+    console.log(item);
+    this.chosenItem = item.value;
+    this.spotify.getSpotifyEmbed(item.value.external_urls.spotify).subscribe(data => document.getElementById('searchResult')!.innerHTML = data.html);
+  }
+
+  search() {
+    // Implement your search functionality here
+    console.log('Searching for:', this.spotifyQuery);
+    this.spotify.searchSpotify(this.spotifyQuery, this.chosenType).subscribe(data => {
+      console.log(data);
+      if (this.chosenType == 'track') {
+        this.searchResults = data.tracks.items;
+      } else if (this.chosenType == 'artist') {
+        this.searchResults = data.artists.items;
+      } else {
+        this.searchResults = data.albums.items;
+      }
+      console.log(this.searchResults);
+    });
+  }
+
+  save() {
+    /*Insert set and save code here */
+    this.modalRef.dismiss();
   }
 
   public favoriteSong: string = '';
@@ -97,8 +155,4 @@ export class UserProfileComponent implements OnInit {
       this.mongoose.createNewUser(this.userData);
     }
   }
-
-
-
-
 }

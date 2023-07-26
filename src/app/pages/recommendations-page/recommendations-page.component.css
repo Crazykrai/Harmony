@@ -16,6 +16,13 @@
     color: seashell;
 }
 
+#friendDropdown {
+    background-color: rgb(48, 48, 48);
+    color: seashell;
+    padding: 5px;
+    border-radius: 5px;
+}
+
 /* Overlay to blur the rest of the content */
 .modal-overlay {
     position: fixed;
@@ -25,7 +32,6 @@
     height: 100%;
     background-color: rgba(244, 236, 236, 0.252);
     font-family: 'Spotify Font', sans-serif;
-    z-index: 9999;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,14 +42,13 @@
     position: relative;
     top: 0;
     left: 0;
-    transform: translate(0,0);
+    transform: translate(0, 0);
     transition: transform 0.3s ease-in-out;
     background-color: rgb(48, 48, 48);
     color: seashell;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 9999;
 }
 
 .modal-container.active {
@@ -55,34 +60,58 @@
     padding: 30px;
 }
 
-.modal-header h4.modal-title,
 .modal-body textarea,
 .modal-footer button,
-.form-group label,
+.form-group1 label,
+.form-group2 label,
+.form-group3 label,
 .form-group select {
-  font-size: 20px;
-  font-family: 'Spotify Font', sans-serif;
+    font-size: 20px;
+    font-family: 'Spotify Font', sans-serif;
 }
 
-.form-group select{
+.modal-header h3.modal-title {
+    font-size: 24px;
+    font-family: 'Spotify Font', sans-serif;
+    margin-bottom: 10px;
+}
+
+.form-group1 {
+    margin-bottom: 10px;
+}
+
+.form-group2 {
+    margin-bottom: 10px;
+}
+
+.form-group3 select {
     width: 100%;
     padding: 10px;
 }
 
+.form-group3 button {
+    margin-left: 15px;
+    margin-top: 25px;
+}
+
 .modal-body textarea {
+    color: seashell;
+    background-color: rgb(48, 48, 48);
     width: 90%;
     padding: 20x;
 }
-  
+
 .modal-header,
 .modal-body,
-.modal-footer{
+.modal-footer {
+    text-align: center;
     padding: 10px;
     font-size: 20px;
     font-family: 'Spotify Font', sans-serif;
 }
 
-.modal-footer button{
-    margin-right: 30px;
+.modal-footer button {
+    margin: 8px;
+    align-items: center;
     width: 40%;
 }

@@ -1,5 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { DatabaseService } from 'src/app/services/database.service';
+import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
   selector: 'app-recommendations-page',
@@ -12,10 +14,16 @@ export class RecommendationsPageComponent {
   modalRef!: NgbModalRef; // Declare modalRef property of type NgbModalRef
   RecommendedSongID: string = '';
   selectedFriend: string = ''; // To store the selected friend
+  ChosenSongID: string = '';
+  chosenType: string = 'track';
+  spotifyQuery: string = '';
+  searchResults: any[] = [];
+
+  chosenItem: any;
 
   friends: string[] = ['Friend 1', 'Friend 2', 'Friend 3', 'Friend 4']; // Update this array with your list of friends
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private spotify: SpotifyService, private modalService: NgbModal) { }
 
   openModal() {
     this.modalRef = this.modalService.open(this.modalContent); // Open the modal and store the reference in modalRef
@@ -25,10 +33,38 @@ export class RecommendationsPageComponent {
     this.modalRef.dismiss();
   }
 
-  search() {
+  searchFriend() {
     // Implement your search functionality here
     console.log('Searching for:', this.inputText);
     console.log('Selected friend:', this.selectedFriend);
     this.dismissModal(); // Close the modal after performing the search (you can remove this if you want to keep the modal open)
+  }
+
+  displaySelectedItem(item: any) {
+    console.log('displaying selected item');
+    console.log(item);
+    this.chosenItem = item.value;
+    this.spotify.getSpotifyEmbed(item.value.external_urls.spotify).subscribe(data => document.getElementById('searchResult')!.innerHTML = data.html);
+  }
+
+  search() {
+    // Implement your search functionality here
+    console.log('Searching for:', this.spotifyQuery);
+    this.spotify.searchSpotify(this.spotifyQuery, this.chosenType).subscribe(data => {
+      console.log(data);
+      if (this.chosenType == 'track') {
+        this.searchResults = data.tracks.items;
+      } else if (this.chosenType == 'artist') {
+        this.searchResults = data.artists.items;
+      } else {
+        this.searchResults = data.albums.items;
+      }
+      console.log(this.searchResults);
+    });
+  }
+
+  send() {
+    /* Write code here to send a recommendation to a friend*/
+    this.modalRef.dismiss();
   }
 }

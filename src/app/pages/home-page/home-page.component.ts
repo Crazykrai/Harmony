@@ -11,12 +11,12 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-  
+
   constructor(private modalService: NgbModal, private spotify: SpotifyService, private mongoose: DatabaseService, private router: Router, private ref: ChangeDetectorRef) {
   }
 
   ngOnInit() {
-    if(!this.spotify.isAuthorized()) {
+    if (!this.spotify.isAuthorized()) {
       this.router.navigate(['']);
     } else {
       this.getFriends();
@@ -29,6 +29,12 @@ export class HomePageComponent implements OnInit {
   modalRef!: NgbModalRef; // Declare modalRef property of type NgbModalRef
   AttachID: string = '';
   selectedFriend: string = ''; // To store the selected friend
+  ChosenSongID: string = '';
+  chosenType: string = 'track';
+  spotifyQuery: string = '';
+  searchResults: any[] = [];
+
+  chosenItem: any;
 
   openModal() {
     this.modalRef = this.modalService.open(this.modalContent); // Open the modal and store the reference in modalRef
@@ -36,6 +42,29 @@ export class HomePageComponent implements OnInit {
 
   dismissModal() {
     this.modalRef.dismiss();
+  }
+
+  displaySelectedItem(item: any) {
+    console.log('displaying selected item');
+    console.log(item);
+    this.chosenItem = item.value;
+    this.spotify.getSpotifyEmbed(item.value.external_urls.spotify).subscribe(data => document.getElementById('searchResult')!.innerHTML = data.html);
+  }
+
+  search() {
+    // Implement your search functionality here
+    console.log('Searching for:', this.spotifyQuery);
+    this.spotify.searchSpotify(this.spotifyQuery, this.chosenType).subscribe(data => {
+      console.log(data);
+      if (this.chosenType == 'track') {
+        this.searchResults = data.tracks.items;
+      } else if (this.chosenType == 'artist') {
+        this.searchResults = data.artists.items;
+      } else {
+        this.searchResults = data.albums.items;
+      }
+      console.log(this.searchResults);
+    });
   }
 
   post() {
