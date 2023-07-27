@@ -1,7 +1,7 @@
 // in-memory-data.service.ts
-import { InMemoryDbService } from 'angular-in-memory-web-api';
 import { Injectable } from '@angular/core';
-import { Message } from './message.model';
+import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { Message } from '../models/message.model';
 
 @Injectable({
   providedIn: 'root',
