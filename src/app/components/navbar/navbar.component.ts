@@ -34,6 +34,7 @@ export class NavbarComponent {
   public getProfileImage(data: UserData) {
     if (data.images[1]) {
       this.userData.imageUrl = data.images[1].url;
+      this.userData.displayName = data.display_name;
     }
   }
 }

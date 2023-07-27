@@ -7,7 +7,8 @@
             <h2>Feed</h2>
         </div>
         <div id="friendColumnName">
-            <h2>Friends</h2>
+            <h2>Friends <button mat-raised-button color="accent" (click)="openModal2()" id="add-friend-button">Add</button>
+            </h2>
         </div>
     </div>
     <div id="recommendedColumn">
@@ -69,3 +70,25 @@
         </div>
     </div>
 </div>
+
+<ng-template #addFriend let-modal>
+    <div class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3 class="modal-title">Add a Friend</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group2">
+                    <mat-form-field>
+                        <label for="TextArea">Friend Email</label>
+                        <input matInput id="TextArea" [(ngModel)]="searchEmail" placeholder="Enter text here">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button mat-raised-button color="accent" (click)="addFriendUser()">Add</button>
+                <button mat-raised-button color="accent" (click)="dismissModal2()">Close</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

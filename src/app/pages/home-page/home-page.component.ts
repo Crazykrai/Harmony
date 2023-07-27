@@ -31,9 +31,12 @@ export class HomePageComponent implements OnInit {
   public posts: Post[] = []
   inputText: string = '';
   @ViewChild('content') modalContent: any; // ViewChild to reference the modal template
+  @ViewChild('addFriend') modalContent2: any;
   modalRef!: NgbModalRef; // Declare modalRef property of type NgbModalRef
+  modalRef2!: NgbModalRef;
   chosenType: string = 'track';
   spotifyQuery: string = '';
+  searchEmail: string = '';
   searchResults: any[] = [];
 
   chosenItem: any;
@@ -42,8 +45,16 @@ export class HomePageComponent implements OnInit {
     this.modalRef = this.modalService.open(this.modalContent); // Open the modal and store the reference in modalRef
   }
 
+  openModal2() {
+    this.modalRef2 = this.modalService.open(this.modalContent2); // Open the modal and store the reference in modalRef
+  }
+
   dismissModal() {
     this.modalRef.dismiss();
+  }
+
+  dismissModal2() {
+    this.modalRef2.dismiss();
   }
 
   displaySelectedItem(item: any) {
@@ -66,6 +77,16 @@ export class HomePageComponent implements OnInit {
         this.searchResults = data.albums.items;
       }
       console.log(this.searchResults);
+    });
+  }
+
+  addFriendUser() {
+    this.mongoose.addNewFriend({
+      user: this.spotify.getCurrentUser().email,
+      newFriend: this.searchEmail
+    }).subscribe(data => {
+      console.log(data);
+      this.getFriends();
     });
   }
 
