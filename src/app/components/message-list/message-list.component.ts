@@ -5,6 +5,7 @@ import { Message } from 'src/app/models/message.model';
 import { UserProfileService } from 'src/app/services/user-profile.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
 import { DatabaseService } from 'src/app/services/database.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-message-list',
