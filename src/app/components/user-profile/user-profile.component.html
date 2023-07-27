@@ -1,17 +1,25 @@
 <body class="profile-page-content">
-    <div id="profile-picture-container">
-        <img [src]="this.userData.imageUrl" alt="Profile Picture" class="profile-picture"
-            [ngClass]="{ 'large-picture': 'true' }" />
-    </div>
+    <mat-card>
+        <div class="profile-picture-container">
+            <div class="profile-picture-info">
+                <img [src]="this.userData.imageUrl" alt="Profile Picture" class="profile-picture"
+                    [ngClass]="{ 'large-picture': 'true' }" />
+            </div>
+        </div>
+        <div class="profile-user-info">
+            <button mat-raised-button color="accent" class="profile-edit-button" (click)="openModal()">
+                Edit Profile
+            </button>
+            <h1><span>Username: </span>{{userData.displayName}}</h1>
+            <h3><span>Email: </span>{{userData.email}}</h3>
+        </div>
+    </mat-card>
     <div>
-        <button mat-raised-button color="accent" id="profile-edit-button" (click)="openModal()">
-            Edit Profile
-        </button>
         <ng-template #content let-modal>
             <div class="modal-overlay">
                 <div class="modal-container">
                     <div class="modal-header">
-                        <h3 class="modal-title">Edit Profile</h3>
+                        <h4 class="modal-title">Edit Profile</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group1">
@@ -46,17 +54,17 @@
                 </div>
             </div>
         </ng-template>
-
-        <div id="user-info">
-            <h1><span>Username: </span>{{userData.displayName}}</h1>
-            <h3><span>Email: </span>{{userData.email}}</h3>
-        </div>
-        <h3><span>Favorite Song: </span> {{favoriteSong}}
-
-        </h3>
-        <div id="fs" style="width:50%; margin-left:25%;"></div>
-        <h3>Favorite Artist: {{favoriteArtist}}
-        </h3>
-        <div id="fa" style="width:50%; margin-left:25%;"></div>
+        <mat-card>
+            <mat-card-title>
+                <span>Favorite Song: </span> {{favoriteSong}}
+            </mat-card-title>
+            <div id="fs" style="width:50%;"></div>
+        </mat-card>
+        <mat-card>
+            <mat-card-title>
+                Favorite Artist: {{favoriteArtist}}
+            </mat-card-title>
+            <div id="fa" style="width:50%; "></div>
+        </mat-card>
     </div>
 </body>

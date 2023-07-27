@@ -22,7 +22,6 @@ export class ActualFriendCardComponent {
   spotifyQuery: string = '';
   @ViewChild('content') modalContent: any; // ViewChild to reference the modal template
   modalRef!: NgbModalRef; // Declare modalRef property of type NgbModalRef
-  RecommendedSongID: string = '';
 
   searchResults: any[] = [];
 

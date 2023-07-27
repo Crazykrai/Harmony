@@ -25,7 +25,7 @@ export class FeedCardComponent {
 
   ngOnInit() {
     //this.spotify.getUserTopTracks().subscribe(data => this.handleTopTracks(data));
-    this.spotify.getSpotifyEmbed(this.feed.item).subscribe(
+    this.spotify.getSpotifyEmbed(this.feed.attachmentUrl).subscribe(
       data => document.getElementById(this.i)!.innerHTML = data.html
     );
   }

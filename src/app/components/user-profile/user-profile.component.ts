@@ -4,12 +4,6 @@ import { UserHarmonyData } from 'src/app/models/userHarmonyData';
 import { UserTopArtists, UserTopSongs } from 'src/app/models/userTopItems';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SpotifyRecommendation } from 'src/app/models/spotifyRecommendation';
 import { Router } from '@angular/router';
@@ -39,7 +33,7 @@ export class UserProfileComponent implements OnInit {
     this.spotify.getUserProfile().subscribe(data => this.showUserData(data));
     this.spotify.getUserTopTracks().subscribe(data => this.handleTopTracks(data));
     this.spotify.getUserTopArtists().subscribe(data => this.handleTopArtists(data));
-  
+
     //this.userProfileService.setUserProfileData(data);
     // if(this.userData.imageUrl[1] != null && this.userData.imageUrl[1] != undefined && this.userData.imageUrl[1] != ''){
     //   this.userData.imageUrl = this.userData.imageUrl[1];

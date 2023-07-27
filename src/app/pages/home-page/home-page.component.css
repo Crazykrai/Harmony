@@ -63,6 +63,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 999;
 }
 
 /* Modal container */
@@ -75,8 +76,10 @@
     background-color: rgb(48, 48, 48);
     color: seashell;
     padding: 20px;
+    min-width: 40%;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 999;
 }
 
 .modal-container.active {
@@ -118,6 +121,10 @@
     margin-top: 25px;
 }
 
+.form-group3 {
+    min-height: 90px;
+}
+
 .modal-body textarea {
     border-radius: 8px;
     padding: 5px;
@@ -138,6 +145,10 @@
 
 .newpost-caption {
     resize: none;
+}
+
+#CaptionArea {
+    min-height: 80px;
 }
 
 .modal-footer button {

@@ -7,11 +7,11 @@
   </div>
   <div class="feed-card-content">
     <div class="feed-picture-container">
-      <img [src]="feed.pictureUrl" alt="Friend's Picture" class="feed-picture"
+      <img [src]="feed.profileImageUrl" alt="Friend's Picture" class="feed-picture"
         [ngClass]="{ 'small-picture': 'true' }" />
     </div>
     <textarea class="feed-caption" readonly="true">
-      {{feed.caption}}
+      {{feed.bodyText}}
     </textarea>
   </div>
 </mat-card>

@@ -1,6 +1,6 @@
 <div class="feed-list">
     <app-feed-card
-      *ngFor="let feed of posts; index as i"
+      *ngFor="let feed of postList; index as i"
       [feed] = "feed"
       [i] = "i.toString()"
     ></app-feed-card>
