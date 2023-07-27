@@ -19,6 +19,10 @@ export class RecommendationListComponent implements OnInit {
 
   public recommendationsList: SpotifyRecommendation[] = [];
   
+  public deleteRecommendation(index: number) {
+    this.recommendationsList.splice(index,1);
+    this.mongoose.updateRecommendations(this.spotify.getCurrentUser().email,this.recommendationsList);
+  }
   recommendations = [
     {
       name: 'Tony',

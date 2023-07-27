@@ -3,5 +3,6 @@
     *ngFor="let recommendation of recommendationsList; index as i"
     [recommendation] = "recommendation"
     [i] = "i.toString()"
+    (recommendationDeleted)="deleteRecommendation($event)"
   ></app-recommendation-card>
 </div>

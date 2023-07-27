@@ -40,6 +40,11 @@ export class DatabaseService {
     return this.http.get<SpotifyRecommendation[]>(this.baseURL + '/user/recommendations/' + email);
   }
 
+  public updateRecommendations(email: string, recommendations: SpotifyRecommendation[]) {
+    console.log('Updating recommendations',recommendations);
+    this.http.post(this.baseURL + '/user/' + email + '/rec',recommendations).subscribe(data => console.log(data));
+  }
+
   public addPost(post: Post, email: string) {
     return this.http.post(this.baseURL + '/user/' + email + '/post', post);
   }

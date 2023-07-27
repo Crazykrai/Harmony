@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SpotifyRecommendation } from 'src/app/models/spotifyRecommendation';
 import { UserPlaylists } from 'src/app/models/userPlaylists';
@@ -19,7 +19,8 @@ export class RecommendationCardComponent {
     senderName: ''
   };
   @Input() i: any;
-  
+
+  @Output() recommendationDeleted = new EventEmitter<number>();
 
   constructor(private modalService: NgbModal,  private spotify: SpotifyService, private mongoose: DatabaseService, private ref: ChangeDetectorRef) {}
 
@@ -45,6 +46,10 @@ export class RecommendationCardComponent {
       data => document.getElementById(this.i)!.innerHTML = data.html
     );
     this.spotify.getUserPlaylists().subscribe(data => this.playlists = data)
+  }
+
+  deleteRecommendation() {
+    this.recommendationDeleted.emit(this.i);
   }
 
   openModal() {
