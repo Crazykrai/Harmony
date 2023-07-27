@@ -4,6 +4,7 @@ import { UserHarmonyData } from 'src/app/models/userHarmonyData';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-home-page',
@@ -27,9 +28,6 @@ export class HomePageComponent implements OnInit {
   inputText: string = '';
   @ViewChild('content') modalContent: any; // ViewChild to reference the modal template
   modalRef!: NgbModalRef; // Declare modalRef property of type NgbModalRef
-  AttachID: string = '';
-  selectedFriend: string = ''; // To store the selected friend
-  ChosenSongID: string = '';
   chosenType: string = 'track';
   spotifyQuery: string = '';
   searchResults: any[] = [];
@@ -70,7 +68,19 @@ export class HomePageComponent implements OnInit {
   post() {
     // Implement your search functionality here
     console.log('Posting with caption:', this.inputText);
-    this.dismissModal(); // Close the modal after performing the search (you can remove this if you want to keep the modal open)
+    const user = this.spotify.getCurrentUser();
+    const postContent: Post = {
+      name: user.displayName,
+      attachmentUrl: this.chosenItem.external_urls.spotify,
+      bodyText: this.inputText,
+      profileImageUrl: user.imageUrl,
+      datePosted: new Date()
+    };
+    this.mongoose.addPost(postContent, user.email).subscribe(data => {
+      console.log(data, 'Post sent');
+      this.ref.detectChanges();
+      this.dismissModal();
+    });
   }
 
   public getFriends() {

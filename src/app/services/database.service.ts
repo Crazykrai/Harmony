@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserHarmonyData } from '../models/userHarmonyData';
 import { SpotifyRecommendation } from '../models/spotifyRecommendation';
+import { Post } from '../models/post';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,14 @@ export class DatabaseService {
 
   public getRecommendations(email: string) {
     return this.http.get<SpotifyRecommendation[]>(this.baseURL + '/user/recommendations/' + email);
+  }
+
+  public addPost(post: Post, email: string) {
+    return this.http.post(this.baseURL + '/user/' + email + '/post', post);
+  }
+
+  public getPosts(email: string) {
+    return this.http.get<Post[]>(this.baseURL + '/user/posts/' + email);
   }
 }
 
