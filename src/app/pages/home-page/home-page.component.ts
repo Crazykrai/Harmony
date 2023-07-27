@@ -21,10 +21,14 @@ export class HomePageComponent implements OnInit {
       this.router.navigate(['']);
     } else {
       this.getFriends();
+      this.mongoose.getPosts(this.spotify.getCurrentUser().email).subscribe(data => {
+        this.posts = data.sort((objA, objB) => new Date(objB.datePosted).getTime() - new Date(objA.datePosted).getTime());
+      });
     }
   }
 
   public friends: UserHarmonyData[] = [];
+  public posts: Post[] = []
   inputText: string = '';
   @ViewChild('content') modalContent: any; // ViewChild to reference the modal template
   modalRef!: NgbModalRef; // Declare modalRef property of type NgbModalRef
@@ -78,8 +82,11 @@ export class HomePageComponent implements OnInit {
     };
     this.mongoose.addPost(postContent, user.email).subscribe(data => {
       console.log(data, 'Post sent');
-      this.ref.detectChanges();
-      this.dismissModal();
+      this.mongoose.getPosts(this.spotify.getCurrentUser().email).subscribe(data => {
+        this.posts = data.sort((objA, objB) => new Date(objB.datePosted).getTime() - new Date(objA.datePosted).getTime());
+        this.ref.detectChanges();
+        this.dismissModal();
+      });
     });
   }
 

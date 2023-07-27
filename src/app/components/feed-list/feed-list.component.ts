@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Post } from 'src/app/models/post';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
@@ -8,20 +8,9 @@ import { SpotifyService } from 'src/app/services/spotify.service';
   templateUrl: './feed-list.component.html',
   styleUrls: ['./feed-list.component.css']
 })
-export class FeedListComponent implements OnInit {
+export class FeedListComponent {
 
-  constructor(private mongoose: DatabaseService, private spotify: SpotifyService) {}
-
-  ngOnInit(): void {
-    this.mongoose.getPosts(this.spotify.getCurrentUser().email).subscribe(data => {
-      this.postList = data;
-      console.log(this.postList);
-      this.posts = this.posts.sort((objA, objB) => objB.datePosted.getTime() - objA.datePosted.getTime());
-      this.postList = this.postList.sort((objA, objB) => new Date(objB.datePosted).getTime() - new Date(objA.datePosted).getTime());
-    });
-    
-  }
-
+  @Input()
   postList: Post[] = [];
   
   posts = [
