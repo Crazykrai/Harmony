@@ -1,10 +1,16 @@
 <mat-toolbar>
-    <span><a mat-button routerLink="home" color="basic"><span>Harmony</span></a></span>
-   
-    <span><a mat-button routerLink="recommendations" color="basic"><span>Recommendations</span></a></span>
-    
-    
-    <span><a mat-button routerLink="messages" color="basic"><span>Messages</span></a></span>
-    <span><a mat-button routerLink="profile" color="basic" ><span>Profile Page</span></a></span>
-    <span></span>
+    <span><a mat-button routerLink="home" color="basic" id="normal-button"><span>Harmony</span></a></span>
+    <span><a mat-button routerLink="recommendations" color="basic"
+            id="normal-button"><span>Recommendations</span></a></span>
+    <span><a mat-button routerLink="messages" color="basic" id="normal-button"><span>Messages</span></a></span>
+    <span class="profile-picture-span">
+        <a mat-button routerLink="profile" color="basic" id="picture-button">
+            <span>
+                <div class="profile-picture-container">
+                    <img [src]="this.userData.imageUrl" alt="Profile Picture" class="profile-picture"
+                        [ngClass]="{ 'small-picture': 'true' }" />
+                </div>
+            </span>
+        </a>
+    </span>
 </mat-toolbar>
