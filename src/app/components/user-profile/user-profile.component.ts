@@ -22,7 +22,7 @@ import { UserProfileService } from 'src/app/user-profile.service';
 })
 
 export class UserProfileComponent implements OnInit {
-  @Input() imageUrl: string = '';
+  image: string = 'https://cropper.watch.aetnd.com/cdn.watch.aetnd.com/sites/2/2020/01/Swamp_People_Season_11_Brock_Theriot_Cast.jpg';
   constructor(private spotify: SpotifyService, private mongoose: DatabaseService, private ref: ChangeDetectorRef, private modalService: NgbModal, private userProfileService: UserProfileService) { }
 
   chosenType: string = 'track';
@@ -41,7 +41,16 @@ export class UserProfileComponent implements OnInit {
     this.spotify.getUserTopArtists().subscribe(data => this.handleTopArtists(data));
   
     //this.userProfileService.setUserProfileData(data);
-    this.userProfileService.setImageUrl(this.imageUrl);
+    // if(this.userData.imageUrl[1] != null && this.userData.imageUrl[1] != undefined && this.userData.imageUrl[1] != ''){
+    //   this.userData.imageUrl = this.userData.imageUrl[1];
+    //   this.saveUserData();
+    //   this.userProfileService.setImageUrl(this.userData.imageUrl);
+    // }
+    // else{
+    //   console.log('setting image url');
+    //   this.userProfileService.setImageUrl(this.image);
+    // }
+    
   }
 
   //  inputText: string = '';
@@ -81,44 +90,7 @@ export class UserProfileComponent implements OnInit {
     this.modalRef.dismiss();
   }
 
-  //  inputText: string = '';
-  //  @ViewChild('content') modalContent: any; // ViewChild to reference the modal template
-  // modalRef!: NgbModalRef; // Declare modalRef property of type NgbModalRef
-  openModal() {
-    this.modalRef = this.modalService.open(this.modalContent); // Open the modal and store the reference in modalRef
-  }
-
-  dismissModal() {
-    this.modalRef.dismiss();
-  }
-
-  displaySelectedItem(item: any) {
-    console.log('displaying selected item');
-    console.log(item);
-    this.chosenItem = item.value;
-    this.spotify.getSpotifyEmbed(item.value.external_urls.spotify).subscribe(data => document.getElementById('searchResult')!.innerHTML = data.html);
-  }
-
-  search() {
-    // Implement your search functionality here
-    console.log('Searching for:', this.spotifyQuery);
-    this.spotify.searchSpotify(this.spotifyQuery, this.chosenType).subscribe(data => {
-      console.log(data);
-      if (this.chosenType == 'track') {
-        this.searchResults = data.tracks.items;
-      } else if (this.chosenType == 'artist') {
-        this.searchResults = data.artists.items;
-      } else {
-        this.searchResults = data.albums.items;
-      }
-      console.log(this.searchResults);
-    });
-  }
-
-  save() {
-    /*Insert set and save code here */
-    this.modalRef.dismiss();
-  }
+  
 
   public favoriteSong: string = '';
 
@@ -146,9 +118,26 @@ export class UserProfileComponent implements OnInit {
       //document.getElementById('profile-picture-container')!.appendChild(profileImage);
       this.ref.detectChanges();
     }
+    if(this.userData.imageUrl == ''){
+      throw new Error('User profile data not set');
+    }
+    this.userProfileService.setImageUrl(this.userData.imageUrl);
     this.saveUserData();
   }
 
+  /* public setUserPictureUrl(data: UserData){
+    if(data.images[1]){
+      this.userData.imageUrl = data.images[1].url;
+      this.saveUserData();
+    }
+    if(this.userData.imageUrl == ''){
+      this.userProfileService.setImageUrl(this.imageUrl);
+    }
+    else{
+      this.userProfileService.setImageUrl(this.userData.imageUrl);
+    }
+    
+  } */
   private handleTopTracks(data: UserTopSongs) {
     if (data.items[0]) {
       this.favoriteSong = data.items[0].name;
@@ -196,5 +185,12 @@ export class UserProfileComponent implements OnInit {
       this.spotify.setCurrentUser(this.userData);
       this.mongoose.createNewUser(this.userData);
     }
+  }
+  //  inputText: string = '';
+  //  @ViewChild('content') modalContent: any; // ViewChild to reference the modal template
+  // modalRef!: NgbModalRef; // Declare modalRef property of type NgbModalRef
+  openModal() {
+    this.modalRef = this.modalService.open(this.modalContent); // Open the modal and store the reference in modalRef
+
   }
 }

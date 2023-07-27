@@ -19,6 +19,13 @@ export class MessageListComponent implements OnInit {
     // Get the user profile picture URL from the query parameters
     this.userProfilePictureUrl = this.userProfileService.getImageUrl();
   }
+ 
+  // check if userProfilePictureUrl is empty if so print no image on to console
+  checkImage() {
+    if (this.userProfilePictureUrl === '') {
+      console.log('No image');
+    }
+  }
   friends: Friend[] = [
     { id: 2, name: 'Nancy', pictureUrl: 'https://image.shutterstock.com/image-photo/happy-young-indian-woman-blogger-260nw-1606121245.jpg'},
     { id: 3, name: 'Robert', pictureUrl: 'https://cropper.watch.aetnd.com/cdn.watch.aetnd.com/sites/2/2020/01/Swamp_People_Season_11_Brock_Theriot_Cast.jpg' },

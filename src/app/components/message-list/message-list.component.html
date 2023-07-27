@@ -24,7 +24,7 @@
      <div *ngFor="let message of getMessagesWithSelectedFriend()" [ngClass]="{ 'user-message': message.senderId === 1, 'friend-message': message.senderId !== 1 }">
         <div *ngIf="message.senderId === 1" class="user-message-info">
           <div class="user-picture-container">
-            <img [src]="userProfilePictureUrl" alt="User's Picture" class="user-picture" [ngClass]="{ 'small-picture': true }" />
+            <img [src]="this.userProfilePictureUrl" alt="User's Picture" class="user-picture" [ngClass]="{ 'small-picture': true }" />
           </div>
           <p>{{ message.text }}</p>
         </div>

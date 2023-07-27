@@ -163,8 +163,47 @@ li {
 
 .user-message-info .user-picture-container {
   margin-right: 5px; /* Add spacing between the user's picture and message */
+  width: 50px; /* Set a smaller width for the container */
+  height: 50px; /* Set a smaller height for the container */
+  flex-shrink: 0;
+  
 }
-
+.user-picture{
+  width: 100%; /* Set the width of the picture (adjust as needed) */
+  height: 100%; /* Set the height of the picture (adjust as needed) */
+  border-radius: 50%;
+}
 .friend-message-info .friend-picture-container {
   margin-left: 5px; /* Add spacing between the friend's picture and message */
+}
+
+.message-input {
+  /* Style the message input area */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px;
+  margin-top: 10px;
+}
+
+.message-input textarea {
+  /* Style the textarea for typing messages */
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+.message-input button {
+  /* Style the send button */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
 }
