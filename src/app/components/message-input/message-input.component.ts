@@ -8,8 +8,8 @@ import { MessageService } from 'src/app/services/message.serivce';
 })
 export class MessageInputComponent {
   newMessage: Message = {
-    id: 0, // You can set a proper ID or generate one on the server-side.
-    senderId: 1, // Replace with the sender's name or username.
+    receiverEmail: '', // You can set a proper ID or generate one on the server-side.
+    senderEmail: '', // Replace with the sender's name or username.
     text: '',
     timestamp: Date.now(),
   };

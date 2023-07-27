@@ -26,7 +26,7 @@ export class RecommendationsPageComponent implements OnInit {
 
   constructor(private spotify: SpotifyService, private modalService: NgbModal, private router: Router) { }
   ngOnInit(): void {
-    if(!this.spotify.isAuthorized()) {
+    if (!this.spotify.isAuthorized()) {
       this.router.navigate(['']);
     }
   }
@@ -69,8 +69,8 @@ export class RecommendationsPageComponent implements OnInit {
     });
   }
 
-  send() {
-    /* Write code here to send a recommendation to a friend*/
+  public sendRecommendation() {
+    /*Code for sending a recommendation */
     this.modalRef.dismiss();
   }
 }

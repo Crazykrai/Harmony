@@ -1,7 +1,7 @@
 export interface Friend {
-    id: number;
+    email: string;
     name: string;
-    pictureUrl: string;
+    imageUrl: string;
   }
   
   
