@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Message } from 'src/app/message.model';
 import { MessageService } from 'src/app/message.serivce';
 import {Friend} from 'src/app/friend.model';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UserProfileService } from 'src/app/user-profile.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
 import { DatabaseService } from 'src/app/services/database.service';
@@ -16,21 +16,26 @@ import { DatabaseService } from 'src/app/services/database.service';
 export class MessageListComponent implements OnInit {
   userProfilePictureUrl: string = ''; // Initialize the user profile picture URL
   currentUserEmail: string = '';
-  constructor(private mongoose:DatabaseService, private userProfileService: UserProfileService, private spotify: SpotifyService) {}
+  constructor(private router: Router, private mongoose:DatabaseService, private userProfileService: UserProfileService, private spotify: SpotifyService) {}
   ngOnInit() {
     // Get the user profile picture URL from the query parameters
-    this.userProfilePictureUrl = this.userProfileService.getImageUrl();
-    this.currentUserEmail = this.spotify.getCurrentUser().email;
-    this.mongoose.getUserFriendData(this.currentUserEmail).subscribe(data => {
-      this.friendList = data.map(friend => {
-        const result: Friend = {
-          email: friend.email,
-          name: friend.displayName,
-          imageUrl: friend.imageUrl
-        };
-        return result;
+    if (!this.spotify.isAuthorized()) {
+      this.router.navigate(['']);
+    } else {
+      this.userProfilePictureUrl = this.userProfileService.getImageUrl();
+      this.currentUserEmail = this.spotify.getCurrentUser().email;
+      this.mongoose.getUserFriendData(this.currentUserEmail).subscribe(data => {
+        this.friendList = data.map(friend => {
+          const result: Friend = {
+            email: friend.email,
+            name: friend.displayName,
+            imageUrl: friend.imageUrl
+          };
+          return result;
+        });
       });
-    });
+    }
+
 
   }
  
@@ -70,7 +75,7 @@ export class MessageListComponent implements OnInit {
     if (this.selectedFriend) {
       this.mongoose.getMessages(this.spotify.getCurrentUser().email,this.selectedFriend.email).subscribe(data => {
         console.log(data);
-        this.messageList = data;
+        this.messageList = data.sort((objA, objB) => new Date(objA.timestamp).getTime() - new Date(objB.timestamp).getTime());;
       });
       //return this.messages.filter(message => message.senderId === 1 || message.senderId === this.selectedFriend?.id);
     }
