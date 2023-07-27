@@ -14,6 +14,8 @@ export class FeedCardComponent {
 
   constructor( private spotify: SpotifyService, private mongoose: DatabaseService, private ref: ChangeDetectorRef) {}
 
+  time: string = '';
+
   addToPlaylist(): void {
     // Handle the "Add Friend" button click event here
     console.log('Added to Playlist!');
@@ -28,5 +30,6 @@ export class FeedCardComponent {
     this.spotify.getSpotifyEmbed(this.feed.attachmentUrl).subscribe(
       data => document.getElementById(this.i)!.innerHTML = data.html
     );
+    this.time = new Date(this.feed.datePosted).toLocaleString();
   }
 }
