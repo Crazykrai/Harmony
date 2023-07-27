@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { UserHarmonyData } from '../models/userHarmonyData';
 import { SpotifyRecommendation } from '../models/spotifyRecommendation';
 import { Post } from '../models/post';
-import { Message } from '../message.model';
+import { Message } from '../models/message.model';
 
 @Injectable({
   providedIn: 'root'
