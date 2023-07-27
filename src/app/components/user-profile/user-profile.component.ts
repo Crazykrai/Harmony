@@ -42,6 +42,10 @@ export class UserProfileComponent implements OnInit {
   //  @ViewChild('content') modalContent: any; // ViewChild to reference the modal template
   // modalRef!: NgbModalRef; // Declare modalRef property of type NgbModalRef
 
+  openModal() {
+    this.modalRef = this.modalService.open(this.modalContent); // Open the modal and store the reference in modalRef
+  }
+
   dismissModal() {
     this.modalRef.dismiss();
   }
