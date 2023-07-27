@@ -4,10 +4,10 @@
     <h3>Friends List</h3>
     <ul>
       
-      <li *ngFor="let friend of friends" (click)="onSelectFriend(friend)" [class.selected]="selectedFriend?.id === friend.id">
+      <li *ngFor="let friend of friendList" (click)="onSelectFriend(friend)" [class.selected]="selectedFriend?.email === friend.email">
         <div class="friend-info">
           <div class="friend-picture-container">
-            <img [src]="friend.pictureUrl" alt="Friend's Picture" class="friend-picture"
+            <img [src]="friend.imageUrl" alt="Friend's Picture" class="friend-picture"
               [ngClass]="{ 'small-picture': 'true' }" />
           </div>
           
@@ -21,16 +21,16 @@
   <div class="col-8 message-window">
    <h3 *ngIf="selectedFriend">Messages with {{ selectedFriend.name }}</h3>
    <div *ngIf="selectedFriend">
-     <div *ngFor="let message of getMessagesWithSelectedFriend()" [ngClass]="{ 'user-message': message.senderId === 1, 'friend-message': message.senderId !== 1 }">
-        <div *ngIf="message.senderId === 1" class="user-message-info">
+     <div *ngFor="let message of messageList" [ngClass]="{ 'user-message': message.senderEmail === currentUserEmail, 'friend-message': message.senderEmail !== currentUserEmail }">
+        <div *ngIf="message.senderEmail === currentUserEmail" class="user-message-info">
           <div class="user-picture-container">
             <img [src]="this.userProfilePictureUrl" alt="User's Picture" class="user-picture" [ngClass]="{ 'small-picture': true }" />
           </div>
           <p>{{ message.text }}</p>
         </div>
-      <div *ngIf="message.senderId !== 1" class="friend-message-info">
+      <div *ngIf="message.senderEmail === selectedFriend.email" class="friend-message-info">
         <div class="friend-picture-container">
-          <img [src]="selectedFriend.pictureUrl" alt="Friend's Picture" class="friend-picture" [ngClass]="{ 'small-picture': true }" />
+          <img [src]="selectedFriend.imageUrl" alt="Friend's Picture" class="friend-picture" [ngClass]="{ 'small-picture': true }" />
         </div>
         <p>{{ message.text }}</p>
       </div>
