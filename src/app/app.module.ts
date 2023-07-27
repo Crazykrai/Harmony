@@ -12,7 +12,10 @@ import { FriendCardComponent } from './components/friend-card/friend-card.compon
 import { FriendListComponent } from './components/friend-list/friend-list.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import {MatRadioModule} from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -56,6 +59,9 @@ import { MessageService } from 'src/app/message.serivce';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatInputModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,

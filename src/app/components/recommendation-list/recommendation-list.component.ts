@@ -1,11 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { SpotifyRecommendation } from 'src/app/models/spotifyRecommendation';
+import { DatabaseService } from 'src/app/services/database.service';
+import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
   selector: 'app-recommendation-list',
   templateUrl: './recommendation-list.component.html',
   styleUrls: ['./recommendation-list.component.css']
 })
-export class RecommendationListComponent {
+export class RecommendationListComponent implements OnInit {
+  constructor(private mongoose: DatabaseService, private spotify: SpotifyService) {}
+
+  ngOnInit(): void {
+    this.mongoose.getRecommendations(this.spotify.getCurrentUser().email).subscribe(data => {
+      this.recommendationsList = data;
+    })
+  }
+
+  public recommendationsList: SpotifyRecommendation[] = [];
+  
   recommendations = [
     {
       name: 'Tony',

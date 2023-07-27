@@ -50,20 +50,22 @@ mat-card {
 }
 
 .feed-caption {
-  max-width: 100%; /* Optional: Adjust the maximum width as per your requirements */
+  max-width: 100%;
+  /* Optional: Adjust the maximum width as per your requirements */
   width: 80%;
   height: 100%;
   padding-bottom: 40px;
   display: flex;
   flex-direction: column;
   resize: none;
+  color: #e1e1e1;
   background-color: rgb(48, 48, 48);
   font-family: 'Spotify Font', sans-serif;
   font-size: medium;
-  color: seashell;
+  border-radius: 10px;
 }
 
 
-.spotify-content{
-  width:100%
+.spotify-content {
+  width: 100%
 }
