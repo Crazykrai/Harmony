@@ -1,8 +1,8 @@
 // message.service.ts
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Message } from './message.model';
+import { Message } from '../models/message.model';
 
 @Injectable({
   providedIn: 'root',

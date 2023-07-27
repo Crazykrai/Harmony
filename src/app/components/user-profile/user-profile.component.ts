@@ -1,13 +1,11 @@
-import { ChangeDetectorRef, ViewChild, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { UserData } from 'src/app/models/userData';
 import { UserHarmonyData } from 'src/app/models/userHarmonyData';
 import { UserTopArtists, UserTopSongs } from 'src/app/models/userTopItems';
 import { DatabaseService } from 'src/app/services/database.service';
 import { SpotifyService } from 'src/app/services/spotify.service';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { SpotifyRecommendation } from 'src/app/models/spotifyRecommendation';
-import { Router } from '@angular/router';
-import { UserProfileService } from 'src/app/user-profile.service';
+import { UserProfileService } from 'src/app/services/user-profile.service';
 
 @Component({
   selector: 'app-user-profile',

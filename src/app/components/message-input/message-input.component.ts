@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Message } from 'src/app/message.model';
-import { MessageService } from 'src/app/message.serivce';
+import { Message } from 'src/app/models/message.model';
+import { MessageService } from 'src/app/services/message.serivce';
 @Component({
   selector: 'app-message-input',
   templateUrl: './message-input.component.html',

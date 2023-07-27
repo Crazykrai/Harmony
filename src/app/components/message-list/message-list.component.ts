@@ -1,10 +1,8 @@
 
-import { Component, OnInit, Input } from '@angular/core';
-import { Message } from 'src/app/message.model';
-import { MessageService } from 'src/app/message.serivce';
-import {Friend} from 'src/app/friend.model';
-import { ActivatedRoute, Params } from '@angular/router';
-import { UserProfileService } from 'src/app/user-profile.service';
+import { Component, OnInit } from '@angular/core';
+import { Friend } from 'src/app/models/friend.model';
+import { Message } from 'src/app/models/message.model';
+import { UserProfileService } from 'src/app/services/user-profile.service';
 
 @Component({
   selector: 'app-message-list',

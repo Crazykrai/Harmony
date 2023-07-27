@@ -13,9 +13,17 @@
     background-color:#424242;
     
     float: left;
-    width: 40%;
+    width: 30%;
     margin: 16px;
     border-radius: 16px;
+
+    flex-direction: column;
+    height: 100%; 
+    display: flex;
+
+    flex-grow: 1; /* Allow the friends list container to grow and take up the available height */
+    max-height: 100%; /* Set a maximum height for the friends list container (optional) */
+    overflow-y: auto;
   
   }
   
@@ -47,7 +55,7 @@
     overflow-y: auto;
     background-color:#424242;
     float: right;
-    width: 40%;
+    width: 50%;
     margin: 16px;
     border-radius: 16px;
   }
@@ -137,7 +145,7 @@ li {
 }
 
 .friend-info span {
-  margin-right: 10px; /* Add spacing between name and picture */
+  margin-left: 10px; /* Add spacing between name and picture */
   font-size: 20px;
   color:white;
 }
@@ -167,6 +175,12 @@ li {
   height: 50px; /* Set a smaller height for the container */
   flex-shrink: 0;
   
+}
+.user-message-info .p{
+  margin-left: 10px;
+}
+.friend-message-info .p{
+  margin-left: 10px;
 }
 .user-picture{
   width: 100%; /* Set the width of the picture (adjust as needed) */
@@ -199,8 +213,8 @@ li {
 }
 .message-input button {
   /* Style the send button */
-  background-color: #007bff;
-  color: #fff;
+  background-color: #69f0ae;
+  color: #000;
   border: none;
   border-radius: 5px;
   padding: 8px 15px;
