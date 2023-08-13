@@ -15,14 +15,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MessageService } from 'src/app/services/message.serivce';
 import { AppRoutingModule } from './app-routing.module';
 import { ActualFriendCardComponent } from './components/actual-friend-card/actual-friend-card.component';
 import { FeedCardComponent } from './components/feed-card/feed-card.component';
 import { FeedListComponent } from './components/feed-list/feed-list.component';
 import { FriendCardComponent } from './components/friend-card/friend-card.component';
 import { FriendListComponent } from './components/friend-list/friend-list.component';
-import { MessageInputComponent } from './components/message-input/message-input.component';
 import { MessageListComponent } from './components/message-list/message-list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RecommendationCardComponent } from './components/recommendation-card/recommendation-card.component';
@@ -49,7 +47,6 @@ import { RecommendationsPageComponent } from './pages/recommendations-page/recom
     FeedCardComponent,
     FeedListComponent,
     MessageListComponent,
-    MessageInputComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +64,7 @@ import { RecommendationsPageComponent } from './pages/recommendations-page/recom
     FormsModule,
    
   ],
-  providers: [MessageService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
